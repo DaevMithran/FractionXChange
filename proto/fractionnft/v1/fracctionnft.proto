@@ -1,0 +1,14 @@
+syntax = "proto3";
+package fractionnft.v1;
+
+import "gogoproto/gogo.proto";
+import "amino/amino.proto";
+import "cosmos_proto/cosmos.proto";
+
+option go_package = "github.com/MANTRA-Chain/mantrachain/x/fractionnft/types";
+
+message TokenizedNFT {
+    string owner = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+
+    int64 timeout_height = 2;
+}

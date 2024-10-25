@@ -37,6 +37,9 @@ import (
 	_ "github.com/MANTRA-Chain/mantrachain/app/params"
 	queries "github.com/MANTRA-Chain/mantrachain/app/queries"
 	_ "github.com/MANTRA-Chain/mantrachain/client/docs/statik"
+	fractionnft "github.com/MANTRA-Chain/mantrachain/x/fractionnft"
+	fractionnftkeeper "github.com/MANTRA-Chain/mantrachain/x/fractionnft/keeper"
+	fractionnfttypes "github.com/MANTRA-Chain/mantrachain/x/fractionnft/types"
 	taxkeeper "github.com/MANTRA-Chain/mantrachain/x/tax/keeper"
 	tax "github.com/MANTRA-Chain/mantrachain/x/tax/module"
 	taxtypes "github.com/MANTRA-Chain/mantrachain/x/tax/types"
@@ -190,6 +193,7 @@ var maccPerms = map[string][]string{
 	feemarkettypes.ModuleName:       {authtypes.Burner},
 	feemarkettypes.FeeCollectorName: {authtypes.Burner},
 	oracletypes.ModuleName:          nil,
+	fractionnfttypes.ModuleName:  {authtypes.Minter, authtypes.Burner},
 }
 
 var (
@@ -256,6 +260,7 @@ type App struct {
 	// MANTRAChain keepers
 	TokenFactoryKeeper tokenfactorykeeper.Keeper
 	TaxKeeper          taxkeeper.Keeper
+	FractionnftKeeper fractionnftkeeper.Keeper
 
 	// the module manager
 	ModuleManager      *module.Manager
@@ -331,6 +336,7 @@ func New(
 		tokenfactorytypes.StoreKey, taxtypes.StoreKey,
 		ibchookstypes.StoreKey,
 		feemarkettypes.StoreKey, oracletypes.StoreKey, marketmaptypes.StoreKey,
+		fractionnfttypes.StoreKey,
 	)
 
 	tkeys := storetypes.NewTransientStoreKeys(paramstypes.TStoreKey)
@@ -639,6 +645,17 @@ func New(
 	// If evidence needs to be handled for the app, set routes in router here and seal
 	app.EvidenceKeeper = *evidenceKeeper
 
+	// Create the fractionnft Keeper
+	app.FractionnftKeeper = fractionnftkeeper.NewKeeper(
+		appCodec,
+		runtime.NewKVStoreService(keys[fractionnfttypes.StoreKey]),
+		logger,
+		authtypes.NewModuleAddress(govtypes.ModuleName).String(),
+		app.AccountKeeper,
+		app.NFTKeeper,
+		app.BankKeeper,
+	)
+
 	// Create Transfer Keepers
 	app.TransferKeeper = ibctransferkeeper.NewKeeper(
 		appCodec,
@@ -769,6 +786,8 @@ func New(
 		tokenfactory.NewAppModule(appCodec, app.TokenFactoryKeeper),
 		tax.NewAppModule(appCodec, app.TaxKeeper),
 		feemarket.NewAppModule(appCodec, *app.FeeMarketKeeper),
+		fractionnft.NewAppModule(appCodec, app.FractionnftKeeper),
+
 	)
 
 	// BasicModuleManager defines the module BasicManager is in charge of setting up basic,
@@ -821,6 +840,7 @@ func New(
 		tokenfactorytypes.ModuleName,
 		oracletypes.ModuleName,
 		marketmaptypes.ModuleName,
+		fractionnfttypes.ModuleName,
 	)
 
 	app.ModuleManager.SetOrderEndBlockers(
@@ -843,6 +863,7 @@ func New(
 		taxtypes.ModuleName,
 		oracletypes.ModuleName,
 		marketmaptypes.ModuleName,
+		fractionnfttypes.ModuleName,
 	)
 
 	// NOTE: The genutils module must occur after staking so that pools are
@@ -891,6 +912,7 @@ func New(
 		// market map genesis must be called AFTER all consuming modules (i.e. x/oracle, etc.)
 		oracletypes.ModuleName,
 		marketmaptypes.ModuleName,
+		fractionnfttypes.ModuleName,
 	}
 	app.ModuleManager.SetOrderInitGenesis(genesisModuleOrder...)
 	app.ModuleManager.SetOrderExportGenesis(genesisModuleOrder...)
@@ -1269,6 +1291,7 @@ func BlockedAddresses() map[string]bool {
 func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino, key, tkey storetypes.StoreKey) paramskeeper.Keeper {
 	paramsKeeper := paramskeeper.NewKeeper(appCodec, legacyAmino, key, tkey)
 	paramsKeeper.Subspace(ratelimittypes.ModuleName)
+	paramsKeeper.Subspace(fractionnfttypes.ModuleName)
 
 	return paramsKeeper
 }

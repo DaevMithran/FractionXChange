@@ -1,0 +1,77 @@
+syntax = "proto3";
+package fractionnft.v1;
+
+import "cosmos/msg/v1/msg.proto";
+import "fractionnft/v1/genesis.proto";
+import "gogoproto/gogo.proto";
+import "cosmos_proto/cosmos.proto";
+
+option go_package = "github.com/MANTRA-Chain/mantrachain/x/fractionnft/types";
+
+// Msg defines the Msg service.
+service Msg {
+  option (cosmos.msg.v1.service) = true;
+
+  // UpdateParams defines a governance operation for updating the parameters.
+  //
+  // Since: cosmos-sdk 0.47
+  rpc UpdateParams(MsgUpdateParams) returns (MsgUpdateParamsResponse);
+
+  rpc MsgTokenizeNFT(MsgTokenizeNFTParams) returns (MsgTokenizeNFTResponse);
+
+  rpc MsgRemintNFT(MsgRemintNFTParams) returns (MsgRemintNFTResponse);
+}
+
+// MsgUpdateParams is the Msg/UpdateParams request type.
+//
+// Since: cosmos-sdk 0.47
+message MsgUpdateParams {
+  option (cosmos.msg.v1.signer) = "authority";
+
+  // authority is the address of the governance account.
+  string authority = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+
+  // params defines the parameters to update.
+  //
+  // NOTE: All parameters must be supplied.
+  Params params = 2 [(gogoproto.nullable) = false];
+}
+
+// MsgUpdateParamsResponse defines the response structure for executing a
+// MsgUpdateParams message.
+//
+// Since: cosmos-sdk 0.47
+message MsgUpdateParamsResponse {}
+
+
+message MsgTokenizeNFTParams {
+    option (cosmos.msg.v1.signer) = "owner";
+
+    string owner = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+
+    string class_id = 2;
+
+    string nft_id = 3;
+
+    int64 token_supply = 4;
+
+    int64 timeout_height = 5;
+}
+
+message MsgTokenizeNFTResponse {
+
+}
+
+message MsgRemintNFTParams {
+    option (cosmos.msg.v1.signer) = "owner";
+
+    string owner = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+
+    string class_id = 2;
+
+    string nft_id = 3;
+}
+
+message MsgRemintNFTResponse {
+
+}
