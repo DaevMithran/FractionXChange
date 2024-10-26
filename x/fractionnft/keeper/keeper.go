@@ -1,9 +1,7 @@
 package keeper
 
 import (
-	"bytes"
 	"context"
-	"encoding/gob"
 	"fmt"
 
 	"github.com/cosmos/cosmos-sdk/codec"
@@ -141,6 +139,13 @@ func (k *Keeper) TokenizeNFT(ctx context.Context, classId string, nftId string, 
 
 	if !k.Nftkeeper.HasNFT(ctx, classId, nftId) {
         return fmt.Errorf("NFT not found: %s", nftId)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(ctx)
+	blockHeight := sdkCtx.BlockHeight()
+	// Restricting timeout: timeout should be alteast greater than 3 blocks
+	if blockHeight + 3 >= timeoutHeight {
+		return fmt.Errorf("timeout should be greater than curent blockHeight %d", blockHeight)
 	}
 
 	denom := "fractionNFT-"+classId+"-"+nftId
@@ -285,11 +290,7 @@ func (k Keeper) MintNFT(ctx context.Context, owner sdk.AccAddress, category stri
 		return err
 	}
 
-	value, err := toBytes(struct {
-		Name string
-		Description string
-		Image string
-	} {
+	data, err := codectypes.NewAnyWithValue(&types.NFTData {
 		Name: name,
 		Description: description,
 		Image: image,
@@ -301,17 +302,6 @@ func (k Keeper) MintNFT(ctx context.Context, owner sdk.AccAddress, category stri
 	return k.Nftkeeper.Mint(ctx, nft.NFT {
 		ClassId: category,
 		Id: id,
-		Data: &codectypes.Any {
-			TypeUrl: "/"+types.ModuleName+".v1.NFTData", 
-			Value: value,
-	}}, owner)
-}
-
-func toBytes(obj interface{}) ([]byte, error) {
-	var buf bytes.Buffer
-	enc := gob.NewEncoder(&buf)
-	if err := enc.Encode(obj); err != nil {
-		return nil, err
-	}
-	return buf.Bytes(), nil
+		Data: data,
+	}, owner)
 }

@@ -233,4 +233,27 @@ build-and-run-single-node: build
 
 sh-testnet: build
 	@echo "Building and running a single node for testing..."
-	CHAIN_ID="mantra-localchain-1" BLOCK_TIME="1000ms" CLEAN=true sh scripts/test_node.sh
+	CHAIN_ID="mantra-localchain-2" BLOCK_TIME="1000ms" CLEAN=true sh scripts/test_node.sh
+
+create-nft:
+	@echo "Create NFT is purely for demo purposes, ideally minted from a separate module with a utility"
+	sh scripts/create_nft.sh
+
+populate-nft:
+	@echo "Populate an NFT"
+	bash ./scripts/populate_nfts.sh
+
+tokenize-nft:
+	@echo "Tokenize an NFT"
+	sh scripts/tokenize_nft.sh
+
+transfer-nft-fractions:
+	@echo "Transfer fractions of an NFT"
+	sh scripts/transfer_fractions.sh
+
+query-nft-owners:
+	@echo "Query owners of NFT"
+	bash scripts/query_denom_owners.sh
+
+demo:
+	bash scripts/demo.sh

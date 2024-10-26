@@ -8,7 +8,7 @@
 export KEY="acc0"
 export KEY2="acc1"
 
-export CHAIN_ID=${CHAIN_ID:-"mantra-localchain-1"}
+export CHAIN_ID=${CHAIN_ID:-"mantra-localchain-2"}
 export MONIKER="localvalidator"
 export KEYALGO="secp256k1"
 export KEYRING=${KEYRING:-"test"}
