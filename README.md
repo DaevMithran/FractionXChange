@@ -36,6 +36,7 @@ To get started with Mantrachain, you'll need to set up your development environm
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/MANTRA-Chain/mantrachain.git
    cd mantrachain
@@ -46,9 +47,21 @@ To get started with Mantrachain, you'll need to set up your development environm
    make install
    ```
 
+### Demo
+
+1. Spawn the network:
+
+```bash
+make sh-testnet
+```
+
+2. Run the demo:
+
+```bash
+make demo
+```
+
 ## Development
-
-
 
 ### Testing
 
@@ -57,8 +70,6 @@ To run unit tests:
 ```bash
 make test-unit
 ```
-
-
 
 ## Architecture
 
@@ -73,6 +84,7 @@ Mantrachain includes several custom modules:
 - `x/xfeemarket`: Extends the fee market functionality to support multiple fee tokens.
 - `x/tokenfactory`: Allows for the creation and management of new tokens (based on Neutron's implementation).
 - `x/tax`: Handles tax-related operations within the chain.
+- `x/fractionnft`: Allows fractionalizing an nft into tokens for a desired period of time
 
 For detailed information on each module, please refer to their respective README files in the `x/` directory.
 
@@ -85,9 +97,6 @@ Please refer to our [Security Policy](SECURITY.md) for more details on reporting
 ## Contributing
 
 We welcome contributions to Mantrachain! Please check out our [Contributing Guide](CONTRIBUTING.md) for guidelines about how to proceed.
-
-
-
 
 ---
 
