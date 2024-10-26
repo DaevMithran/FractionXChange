@@ -24,6 +24,7 @@ import (
 
 	nftkeeper "cosmossdk.io/x/nft/keeper"
 	authkeeper "github.com/cosmos/cosmos-sdk/x/auth/keeper"
+	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	bankkeeper "github.com/cosmos/cosmos-sdk/x/bank/keeper"
 )
 
@@ -73,7 +74,7 @@ func (am AppModule) EndBlock(ctx context.Context) ([]abci.ValidatorUpdate, error
 	for _, v := range keyValues {
 		if v.Value.TimeoutHeight == blockHeight {
 			splitted := strings.Split(v.Key, "-")
-			am.keeper.RemintNFT(ctx, splitted[1], splitted[2], sdk.AccAddress(types.ModuleName))
+			am.keeper.RemintNFT(ctx, splitted[1], splitted[2], authtypes.NewModuleAddress(types.ModuleName))
 		} 
 	}
 	return nil, nil

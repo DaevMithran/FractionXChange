@@ -648,6 +648,7 @@ func New(
 	// Create the fractionnft Keeper
 	app.FractionnftKeeper = fractionnftkeeper.NewKeeper(
 		appCodec,
+		authcodec.NewBech32Codec(sdk.GetConfig().GetBech32AccountAddrPrefix()),
 		runtime.NewKVStoreService(keys[fractionnfttypes.StoreKey]),
 		logger,
 		authtypes.NewModuleAddress(govtypes.ModuleName).String(),

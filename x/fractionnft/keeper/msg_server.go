@@ -59,3 +59,17 @@ func (ms msgServer) MsgRemintNFT(ctx context.Context, msg *types.MsgRemintNFTPar
 	return &types.MsgRemintNFTResponse{}, nil
 }
 
+
+func (ms msgServer) MsgMintNFT(ctx context.Context, msg *types.MsgMintNFTParams) (*types.MsgMintNFTResponse, error) {
+	owner, err := ms.k.addressCodec.StringToBytes(msg.Owner)
+	if err != nil {
+		return nil, sdkerrors.ErrInvalidAddress.Wrapf("invalid owner address: %s", err)
+	}
+
+	err = ms.k.MintNFT(ctx, owner, msg.Category, msg.Id, msg.Name, msg.Description, msg.Image)
+	if err != nil {
+		return nil, err
+	}
+	return &types.MsgMintNFTResponse{}, nil
+}
+

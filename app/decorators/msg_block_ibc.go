@@ -21,9 +21,9 @@ type MsgFilterDecorator struct {
 // Example:
 // - decorators.FilterDecorator(&banktypes.MsgSend{})
 // This would block any MsgSend messages from being included in a transaction if set in ante.go
-func FilterDecorator(blockedMsgTypes ...sdk.Msg) MsgFilterDecorator {
+func FilterDecorator() MsgFilterDecorator {
 	return MsgFilterDecorator{
-		blockedTypes: blockedMsgTypes,
+
 	}
 }
 

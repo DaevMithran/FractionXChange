@@ -76,7 +76,7 @@ func SetupTest(t *testing.T) *testFixture {
 	registerBaseSDKModules(logger, f, encCfg, keys)
 
 	// Setup Keeper.
-	f.k = keeper.NewKeeper(encCfg.Codec, runtime.NewKVStoreService(keys[types.ModuleName]), logger, f.govModAddr, f.accountkeeper, f.nftkeeper, f.bankkeeper)
+	f.k = keeper.NewKeeper(encCfg.Codec, authcodec.NewBech32Codec(sdk.GetConfig().GetBech32AccountAddrPrefix()), runtime.NewKVStoreService(keys[types.ModuleName]), logger, f.govModAddr, f.accountkeeper, f.nftkeeper, f.bankkeeper)
 	f.msgServer = keeper.NewMsgServerImpl(f.k)
 	f.queryServer = keeper.NewQuerier(f.k)
 	f.appModule = module.NewAppModule(encCfg.Codec, f.k, f.accountkeeper, f.nftkeeper, f.bankkeeper)

@@ -12,3 +12,11 @@ message TokenizedNFT {
 
     int64 timeout_height = 2;
 }
+
+message NFTData {
+    string name = 1;
+
+    string description = 2;
+
+    string image = 3;
+}

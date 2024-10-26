@@ -223,10 +223,14 @@ build-and-run-single-node: build
 	@if [ ! -f .mantrasinglenodetest/config.toml ]; then \
 		./build/mantrachaind init single-node-test --chain-id test-chain --home .mantrasinglenodetest; \
 		./build/mantrachaind keys add validator --keyring-backend test --home .mantrasinglenodetest; \
-		./build/mantrachaind genesis add-genesis-account $$(./build/mantrachaind keys show validator -a --keyring-backend test --home .mantrasinglenodetest) 100000000stake --home .mantrasinglenodetest; \
-		./build/mantrachaind genesis gentx validator 100000000stake --chain-id test-chain --keyring-backend test --home .mantrasinglenodetest; \
+		./build/mantrachaind genesis add-genesis-account $$(./build/mantrachaind keys show validator -a --keyring-backend test --home .mantrasinglenodetest) 100000000uom --home .mantrasinglenodetest; \
+		./build/mantrachaind genesis gentx validator 100000000uom --chain-id test-chain --keyring-backend test --home .mantrasinglenodetest; \
 		./build/mantrachaind genesis collect-gentxs --home .mantrasinglenodetest; \
 	fi
-	./build/mantrachaind start --home .mantrasinglenodetest --minimum-gas-prices 0stake
+	./build/mantrachaind start --home .mantrasinglenodetest --minimum-gas-prices 0.001uom
 
 .PHONY: build-and-run-single-node
+
+sh-testnet: build
+	@echo "Building and running a single node for testing..."
+	CHAIN_ID="mantra-localchain-1" BLOCK_TIME="1000ms" CLEAN=true sh scripts/test_node.sh

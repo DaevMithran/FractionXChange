@@ -2774,6 +2774,1102 @@ func (x *fastReflection_MsgRemintNFTResponse) ProtoMethods() *protoiface.Methods
 	}
 }
 
+var (
+	md_MsgMintNFTParams             protoreflect.MessageDescriptor
+	fd_MsgMintNFTParams_owner       protoreflect.FieldDescriptor
+	fd_MsgMintNFTParams_name        protoreflect.FieldDescriptor
+	fd_MsgMintNFTParams_id          protoreflect.FieldDescriptor
+	fd_MsgMintNFTParams_description protoreflect.FieldDescriptor
+	fd_MsgMintNFTParams_image       protoreflect.FieldDescriptor
+	fd_MsgMintNFTParams_category    protoreflect.FieldDescriptor
+)
+
+func init() {
+	file_fractionnft_v1_tx_proto_init()
+	md_MsgMintNFTParams = File_fractionnft_v1_tx_proto.Messages().ByName("MsgMintNFTParams")
+	fd_MsgMintNFTParams_owner = md_MsgMintNFTParams.Fields().ByName("owner")
+	fd_MsgMintNFTParams_name = md_MsgMintNFTParams.Fields().ByName("name")
+	fd_MsgMintNFTParams_id = md_MsgMintNFTParams.Fields().ByName("id")
+	fd_MsgMintNFTParams_description = md_MsgMintNFTParams.Fields().ByName("description")
+	fd_MsgMintNFTParams_image = md_MsgMintNFTParams.Fields().ByName("image")
+	fd_MsgMintNFTParams_category = md_MsgMintNFTParams.Fields().ByName("category")
+}
+
+var _ protoreflect.Message = (*fastReflection_MsgMintNFTParams)(nil)
+
+type fastReflection_MsgMintNFTParams MsgMintNFTParams
+
+func (x *MsgMintNFTParams) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_MsgMintNFTParams)(x)
+}
+
+func (x *MsgMintNFTParams) slowProtoReflect() protoreflect.Message {
+	mi := &file_fractionnft_v1_tx_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+var _fastReflection_MsgMintNFTParams_messageType fastReflection_MsgMintNFTParams_messageType
+var _ protoreflect.MessageType = fastReflection_MsgMintNFTParams_messageType{}
+
+type fastReflection_MsgMintNFTParams_messageType struct{}
+
+func (x fastReflection_MsgMintNFTParams_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_MsgMintNFTParams)(nil)
+}
+func (x fastReflection_MsgMintNFTParams_messageType) New() protoreflect.Message {
+	return new(fastReflection_MsgMintNFTParams)
+}
+func (x fastReflection_MsgMintNFTParams_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_MsgMintNFTParams
+}
+
+// Descriptor returns message descriptor, which contains only the protobuf
+// type information for the message.
+func (x *fastReflection_MsgMintNFTParams) Descriptor() protoreflect.MessageDescriptor {
+	return md_MsgMintNFTParams
+}
+
+// Type returns the message type, which encapsulates both Go and protobuf
+// type information. If the Go type information is not needed,
+// it is recommended that the message descriptor be used instead.
+func (x *fastReflection_MsgMintNFTParams) Type() protoreflect.MessageType {
+	return _fastReflection_MsgMintNFTParams_messageType
+}
+
+// New returns a newly allocated and mutable empty message.
+func (x *fastReflection_MsgMintNFTParams) New() protoreflect.Message {
+	return new(fastReflection_MsgMintNFTParams)
+}
+
+// Interface unwraps the message reflection interface and
+// returns the underlying ProtoMessage interface.
+func (x *fastReflection_MsgMintNFTParams) Interface() protoreflect.ProtoMessage {
+	return (*MsgMintNFTParams)(x)
+}
+
+// Range iterates over every populated field in an undefined order,
+// calling f for each field descriptor and value encountered.
+// Range returns immediately if f returns false.
+// While iterating, mutating operations may only be performed
+// on the current field descriptor.
+func (x *fastReflection_MsgMintNFTParams) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.Owner != "" {
+		value := protoreflect.ValueOfString(x.Owner)
+		if !f(fd_MsgMintNFTParams_owner, value) {
+			return
+		}
+	}
+	if x.Name != "" {
+		value := protoreflect.ValueOfString(x.Name)
+		if !f(fd_MsgMintNFTParams_name, value) {
+			return
+		}
+	}
+	if x.Id != "" {
+		value := protoreflect.ValueOfString(x.Id)
+		if !f(fd_MsgMintNFTParams_id, value) {
+			return
+		}
+	}
+	if x.Description != "" {
+		value := protoreflect.ValueOfString(x.Description)
+		if !f(fd_MsgMintNFTParams_description, value) {
+			return
+		}
+	}
+	if x.Image != "" {
+		value := protoreflect.ValueOfString(x.Image)
+		if !f(fd_MsgMintNFTParams_image, value) {
+			return
+		}
+	}
+	if x.Category != "" {
+		value := protoreflect.ValueOfString(x.Category)
+		if !f(fd_MsgMintNFTParams_category, value) {
+			return
+		}
+	}
+}
+
+// Has reports whether a field is populated.
+//
+// Some fields have the property of nullability where it is possible to
+// distinguish between the default value of a field and whether the field
+// was explicitly populated with the default value. Singular message fields,
+// member fields of a oneof, and proto2 scalar fields are nullable. Such
+// fields are populated only if explicitly set.
+//
+// In other cases (aside from the nullable cases above),
+// a proto3 scalar field is populated if it contains a non-zero value, and
+// a repeated field is populated if it is non-empty.
+func (x *fastReflection_MsgMintNFTParams) Has(fd protoreflect.FieldDescriptor) bool {
+	switch fd.FullName() {
+	case "fractionnft.v1.MsgMintNFTParams.owner":
+		return x.Owner != ""
+	case "fractionnft.v1.MsgMintNFTParams.name":
+		return x.Name != ""
+	case "fractionnft.v1.MsgMintNFTParams.id":
+		return x.Id != ""
+	case "fractionnft.v1.MsgMintNFTParams.description":
+		return x.Description != ""
+	case "fractionnft.v1.MsgMintNFTParams.image":
+		return x.Image != ""
+	case "fractionnft.v1.MsgMintNFTParams.category":
+		return x.Category != ""
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fractionnft.v1.MsgMintNFTParams"))
+		}
+		panic(fmt.Errorf("message fractionnft.v1.MsgMintNFTParams does not contain field %s", fd.FullName()))
+	}
+}
+
+// Clear clears the field such that a subsequent Has call reports false.
+//
+// Clearing an extension field clears both the extension type and value
+// associated with the given field number.
+//
+// Clear is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_MsgMintNFTParams) Clear(fd protoreflect.FieldDescriptor) {
+	switch fd.FullName() {
+	case "fractionnft.v1.MsgMintNFTParams.owner":
+		x.Owner = ""
+	case "fractionnft.v1.MsgMintNFTParams.name":
+		x.Name = ""
+	case "fractionnft.v1.MsgMintNFTParams.id":
+		x.Id = ""
+	case "fractionnft.v1.MsgMintNFTParams.description":
+		x.Description = ""
+	case "fractionnft.v1.MsgMintNFTParams.image":
+		x.Image = ""
+	case "fractionnft.v1.MsgMintNFTParams.category":
+		x.Category = ""
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fractionnft.v1.MsgMintNFTParams"))
+		}
+		panic(fmt.Errorf("message fractionnft.v1.MsgMintNFTParams does not contain field %s", fd.FullName()))
+	}
+}
+
+// Get retrieves the value for a field.
+//
+// For unpopulated scalars, it returns the default value, where
+// the default value of a bytes scalar is guaranteed to be a copy.
+// For unpopulated composite types, it returns an empty, read-only view
+// of the value; to obtain a mutable reference, use Mutable.
+func (x *fastReflection_MsgMintNFTParams) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+	switch descriptor.FullName() {
+	case "fractionnft.v1.MsgMintNFTParams.owner":
+		value := x.Owner
+		return protoreflect.ValueOfString(value)
+	case "fractionnft.v1.MsgMintNFTParams.name":
+		value := x.Name
+		return protoreflect.ValueOfString(value)
+	case "fractionnft.v1.MsgMintNFTParams.id":
+		value := x.Id
+		return protoreflect.ValueOfString(value)
+	case "fractionnft.v1.MsgMintNFTParams.description":
+		value := x.Description
+		return protoreflect.ValueOfString(value)
+	case "fractionnft.v1.MsgMintNFTParams.image":
+		value := x.Image
+		return protoreflect.ValueOfString(value)
+	case "fractionnft.v1.MsgMintNFTParams.category":
+		value := x.Category
+		return protoreflect.ValueOfString(value)
+	default:
+		if descriptor.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fractionnft.v1.MsgMintNFTParams"))
+		}
+		panic(fmt.Errorf("message fractionnft.v1.MsgMintNFTParams does not contain field %s", descriptor.FullName()))
+	}
+}
+
+// Set stores the value for a field.
+//
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType.
+// When setting a composite type, it is unspecified whether the stored value
+// aliases the source's memory in any way. If the composite value is an
+// empty, read-only value, then it panics.
+//
+// Set is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_MsgMintNFTParams) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+	switch fd.FullName() {
+	case "fractionnft.v1.MsgMintNFTParams.owner":
+		x.Owner = value.Interface().(string)
+	case "fractionnft.v1.MsgMintNFTParams.name":
+		x.Name = value.Interface().(string)
+	case "fractionnft.v1.MsgMintNFTParams.id":
+		x.Id = value.Interface().(string)
+	case "fractionnft.v1.MsgMintNFTParams.description":
+		x.Description = value.Interface().(string)
+	case "fractionnft.v1.MsgMintNFTParams.image":
+		x.Image = value.Interface().(string)
+	case "fractionnft.v1.MsgMintNFTParams.category":
+		x.Category = value.Interface().(string)
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fractionnft.v1.MsgMintNFTParams"))
+		}
+		panic(fmt.Errorf("message fractionnft.v1.MsgMintNFTParams does not contain field %s", fd.FullName()))
+	}
+}
+
+// Mutable returns a mutable reference to a composite type.
+//
+// If the field is unpopulated, it may allocate a composite value.
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType
+// if not already stored.
+// It panics if the field does not contain a composite type.
+//
+// Mutable is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_MsgMintNFTParams) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "fractionnft.v1.MsgMintNFTParams.owner":
+		panic(fmt.Errorf("field owner of message fractionnft.v1.MsgMintNFTParams is not mutable"))
+	case "fractionnft.v1.MsgMintNFTParams.name":
+		panic(fmt.Errorf("field name of message fractionnft.v1.MsgMintNFTParams is not mutable"))
+	case "fractionnft.v1.MsgMintNFTParams.id":
+		panic(fmt.Errorf("field id of message fractionnft.v1.MsgMintNFTParams is not mutable"))
+	case "fractionnft.v1.MsgMintNFTParams.description":
+		panic(fmt.Errorf("field description of message fractionnft.v1.MsgMintNFTParams is not mutable"))
+	case "fractionnft.v1.MsgMintNFTParams.image":
+		panic(fmt.Errorf("field image of message fractionnft.v1.MsgMintNFTParams is not mutable"))
+	case "fractionnft.v1.MsgMintNFTParams.category":
+		panic(fmt.Errorf("field category of message fractionnft.v1.MsgMintNFTParams is not mutable"))
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fractionnft.v1.MsgMintNFTParams"))
+		}
+		panic(fmt.Errorf("message fractionnft.v1.MsgMintNFTParams does not contain field %s", fd.FullName()))
+	}
+}
+
+// NewField returns a new value that is assignable to the field
+// for the given descriptor. For scalars, this returns the default value.
+// For lists, maps, and messages, this returns a new, empty, mutable value.
+func (x *fastReflection_MsgMintNFTParams) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "fractionnft.v1.MsgMintNFTParams.owner":
+		return protoreflect.ValueOfString("")
+	case "fractionnft.v1.MsgMintNFTParams.name":
+		return protoreflect.ValueOfString("")
+	case "fractionnft.v1.MsgMintNFTParams.id":
+		return protoreflect.ValueOfString("")
+	case "fractionnft.v1.MsgMintNFTParams.description":
+		return protoreflect.ValueOfString("")
+	case "fractionnft.v1.MsgMintNFTParams.image":
+		return protoreflect.ValueOfString("")
+	case "fractionnft.v1.MsgMintNFTParams.category":
+		return protoreflect.ValueOfString("")
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fractionnft.v1.MsgMintNFTParams"))
+		}
+		panic(fmt.Errorf("message fractionnft.v1.MsgMintNFTParams does not contain field %s", fd.FullName()))
+	}
+}
+
+// WhichOneof reports which field within the oneof is populated,
+// returning nil if none are populated.
+// It panics if the oneof descriptor does not belong to this message.
+func (x *fastReflection_MsgMintNFTParams) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+	switch d.FullName() {
+	default:
+		panic(fmt.Errorf("%s is not a oneof field in fractionnft.v1.MsgMintNFTParams", d.FullName()))
+	}
+	panic("unreachable")
+}
+
+// GetUnknown retrieves the entire list of unknown fields.
+// The caller may only mutate the contents of the RawFields
+// if the mutated bytes are stored back into the message with SetUnknown.
+func (x *fastReflection_MsgMintNFTParams) GetUnknown() protoreflect.RawFields {
+	return x.unknownFields
+}
+
+// SetUnknown stores an entire list of unknown fields.
+// The raw fields must be syntactically valid according to the wire format.
+// An implementation may panic if this is not the case.
+// Once stored, the caller must not mutate the content of the RawFields.
+// An empty RawFields may be passed to clear the fields.
+//
+// SetUnknown is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_MsgMintNFTParams) SetUnknown(fields protoreflect.RawFields) {
+	x.unknownFields = fields
+}
+
+// IsValid reports whether the message is valid.
+//
+// An invalid message is an empty, read-only value.
+//
+// An invalid message often corresponds to a nil pointer of the concrete
+// message type, but the details are implementation dependent.
+// Validity is not part of the protobuf data model, and may not
+// be preserved in marshaling or other operations.
+func (x *fastReflection_MsgMintNFTParams) IsValid() bool {
+	return x != nil
+}
+
+// ProtoMethods returns optional fastReflectionFeature-path implementations of various operations.
+// This method may return nil.
+//
+// The returned methods type is identical to
+// "google.golang.org/protobuf/runtime/protoiface".Methods.
+// Consult the protoiface package documentation for details.
+func (x *fastReflection_MsgMintNFTParams) ProtoMethods() *protoiface.Methods {
+	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
+		x := input.Message.Interface().(*MsgMintNFTParams)
+		if x == nil {
+			return protoiface.SizeOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Size:              0,
+			}
+		}
+		options := runtime.SizeInputToOptions(input)
+		_ = options
+		var n int
+		var l int
+		_ = l
+		l = len(x.Owner)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		l = len(x.Name)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		l = len(x.Id)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		l = len(x.Description)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		l = len(x.Image)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		l = len(x.Category)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		if x.unknownFields != nil {
+			n += len(x.unknownFields)
+		}
+		return protoiface.SizeOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Size:              n,
+		}
+	}
+
+	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
+		x := input.Message.Interface().(*MsgMintNFTParams)
+		if x == nil {
+			return protoiface.MarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Buf:               input.Buf,
+			}, nil
+		}
+		options := runtime.MarshalInputToOptions(input)
+		_ = options
+		size := options.Size(x)
+		dAtA := make([]byte, size)
+		i := len(dAtA)
+		_ = i
+		var l int
+		_ = l
+		if x.unknownFields != nil {
+			i -= len(x.unknownFields)
+			copy(dAtA[i:], x.unknownFields)
+		}
+		if len(x.Category) > 0 {
+			i -= len(x.Category)
+			copy(dAtA[i:], x.Category)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Category)))
+			i--
+			dAtA[i] = 0x32
+		}
+		if len(x.Image) > 0 {
+			i -= len(x.Image)
+			copy(dAtA[i:], x.Image)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Image)))
+			i--
+			dAtA[i] = 0x2a
+		}
+		if len(x.Description) > 0 {
+			i -= len(x.Description)
+			copy(dAtA[i:], x.Description)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Description)))
+			i--
+			dAtA[i] = 0x22
+		}
+		if len(x.Id) > 0 {
+			i -= len(x.Id)
+			copy(dAtA[i:], x.Id)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Id)))
+			i--
+			dAtA[i] = 0x1a
+		}
+		if len(x.Name) > 0 {
+			i -= len(x.Name)
+			copy(dAtA[i:], x.Name)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Name)))
+			i--
+			dAtA[i] = 0x12
+		}
+		if len(x.Owner) > 0 {
+			i -= len(x.Owner)
+			copy(dAtA[i:], x.Owner)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Owner)))
+			i--
+			dAtA[i] = 0xa
+		}
+		if input.Buf != nil {
+			input.Buf = append(input.Buf, dAtA...)
+		} else {
+			input.Buf = dAtA
+		}
+		return protoiface.MarshalOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Buf:               input.Buf,
+		}, nil
+	}
+	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
+		x := input.Message.Interface().(*MsgMintNFTParams)
+		if x == nil {
+			return protoiface.UnmarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Flags:             input.Flags,
+			}, nil
+		}
+		options := runtime.UnmarshalInputToOptions(input)
+		_ = options
+		dAtA := input.Buf
+		l := len(dAtA)
+		iNdEx := 0
+		for iNdEx < l {
+			preIndex := iNdEx
+			var wire uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				wire |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			fieldNum := int32(wire >> 3)
+			wireType := int(wire & 0x7)
+			if wireType == 4 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgMintNFTParams: wiretype end group for non-group")
+			}
+			if fieldNum <= 0 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgMintNFTParams: illegal tag %d (wire type %d)", fieldNum, wire)
+			}
+			switch fieldNum {
+			case 1:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Owner", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Owner = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 2:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Name = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 3:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Id = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 4:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Description = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 5:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Image", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Image = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 6:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Category", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Category = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			default:
+				iNdEx = preIndex
+				skippy, err := runtime.Skip(dAtA[iNdEx:])
+				if err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				if (skippy < 0) || (iNdEx+skippy) < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if (iNdEx + skippy) > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if !options.DiscardUnknown {
+					x.unknownFields = append(x.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+				}
+				iNdEx += skippy
+			}
+		}
+
+		if iNdEx > l {
+			return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+		}
+		return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, nil
+	}
+	return &protoiface.Methods{
+		NoUnkeyedLiterals: struct{}{},
+		Flags:             protoiface.SupportMarshalDeterministic | protoiface.SupportUnmarshalDiscardUnknown,
+		Size:              size,
+		Marshal:           marshal,
+		Unmarshal:         unmarshal,
+		Merge:             nil,
+		CheckInitialized:  nil,
+	}
+}
+
+var (
+	md_MsgMintNFTResponse protoreflect.MessageDescriptor
+)
+
+func init() {
+	file_fractionnft_v1_tx_proto_init()
+	md_MsgMintNFTResponse = File_fractionnft_v1_tx_proto.Messages().ByName("MsgMintNFTResponse")
+}
+
+var _ protoreflect.Message = (*fastReflection_MsgMintNFTResponse)(nil)
+
+type fastReflection_MsgMintNFTResponse MsgMintNFTResponse
+
+func (x *MsgMintNFTResponse) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_MsgMintNFTResponse)(x)
+}
+
+func (x *MsgMintNFTResponse) slowProtoReflect() protoreflect.Message {
+	mi := &file_fractionnft_v1_tx_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+var _fastReflection_MsgMintNFTResponse_messageType fastReflection_MsgMintNFTResponse_messageType
+var _ protoreflect.MessageType = fastReflection_MsgMintNFTResponse_messageType{}
+
+type fastReflection_MsgMintNFTResponse_messageType struct{}
+
+func (x fastReflection_MsgMintNFTResponse_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_MsgMintNFTResponse)(nil)
+}
+func (x fastReflection_MsgMintNFTResponse_messageType) New() protoreflect.Message {
+	return new(fastReflection_MsgMintNFTResponse)
+}
+func (x fastReflection_MsgMintNFTResponse_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_MsgMintNFTResponse
+}
+
+// Descriptor returns message descriptor, which contains only the protobuf
+// type information for the message.
+func (x *fastReflection_MsgMintNFTResponse) Descriptor() protoreflect.MessageDescriptor {
+	return md_MsgMintNFTResponse
+}
+
+// Type returns the message type, which encapsulates both Go and protobuf
+// type information. If the Go type information is not needed,
+// it is recommended that the message descriptor be used instead.
+func (x *fastReflection_MsgMintNFTResponse) Type() protoreflect.MessageType {
+	return _fastReflection_MsgMintNFTResponse_messageType
+}
+
+// New returns a newly allocated and mutable empty message.
+func (x *fastReflection_MsgMintNFTResponse) New() protoreflect.Message {
+	return new(fastReflection_MsgMintNFTResponse)
+}
+
+// Interface unwraps the message reflection interface and
+// returns the underlying ProtoMessage interface.
+func (x *fastReflection_MsgMintNFTResponse) Interface() protoreflect.ProtoMessage {
+	return (*MsgMintNFTResponse)(x)
+}
+
+// Range iterates over every populated field in an undefined order,
+// calling f for each field descriptor and value encountered.
+// Range returns immediately if f returns false.
+// While iterating, mutating operations may only be performed
+// on the current field descriptor.
+func (x *fastReflection_MsgMintNFTResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+}
+
+// Has reports whether a field is populated.
+//
+// Some fields have the property of nullability where it is possible to
+// distinguish between the default value of a field and whether the field
+// was explicitly populated with the default value. Singular message fields,
+// member fields of a oneof, and proto2 scalar fields are nullable. Such
+// fields are populated only if explicitly set.
+//
+// In other cases (aside from the nullable cases above),
+// a proto3 scalar field is populated if it contains a non-zero value, and
+// a repeated field is populated if it is non-empty.
+func (x *fastReflection_MsgMintNFTResponse) Has(fd protoreflect.FieldDescriptor) bool {
+	switch fd.FullName() {
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fractionnft.v1.MsgMintNFTResponse"))
+		}
+		panic(fmt.Errorf("message fractionnft.v1.MsgMintNFTResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// Clear clears the field such that a subsequent Has call reports false.
+//
+// Clearing an extension field clears both the extension type and value
+// associated with the given field number.
+//
+// Clear is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_MsgMintNFTResponse) Clear(fd protoreflect.FieldDescriptor) {
+	switch fd.FullName() {
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fractionnft.v1.MsgMintNFTResponse"))
+		}
+		panic(fmt.Errorf("message fractionnft.v1.MsgMintNFTResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// Get retrieves the value for a field.
+//
+// For unpopulated scalars, it returns the default value, where
+// the default value of a bytes scalar is guaranteed to be a copy.
+// For unpopulated composite types, it returns an empty, read-only view
+// of the value; to obtain a mutable reference, use Mutable.
+func (x *fastReflection_MsgMintNFTResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+	switch descriptor.FullName() {
+	default:
+		if descriptor.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fractionnft.v1.MsgMintNFTResponse"))
+		}
+		panic(fmt.Errorf("message fractionnft.v1.MsgMintNFTResponse does not contain field %s", descriptor.FullName()))
+	}
+}
+
+// Set stores the value for a field.
+//
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType.
+// When setting a composite type, it is unspecified whether the stored value
+// aliases the source's memory in any way. If the composite value is an
+// empty, read-only value, then it panics.
+//
+// Set is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_MsgMintNFTResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+	switch fd.FullName() {
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fractionnft.v1.MsgMintNFTResponse"))
+		}
+		panic(fmt.Errorf("message fractionnft.v1.MsgMintNFTResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// Mutable returns a mutable reference to a composite type.
+//
+// If the field is unpopulated, it may allocate a composite value.
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType
+// if not already stored.
+// It panics if the field does not contain a composite type.
+//
+// Mutable is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_MsgMintNFTResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fractionnft.v1.MsgMintNFTResponse"))
+		}
+		panic(fmt.Errorf("message fractionnft.v1.MsgMintNFTResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// NewField returns a new value that is assignable to the field
+// for the given descriptor. For scalars, this returns the default value.
+// For lists, maps, and messages, this returns a new, empty, mutable value.
+func (x *fastReflection_MsgMintNFTResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: fractionnft.v1.MsgMintNFTResponse"))
+		}
+		panic(fmt.Errorf("message fractionnft.v1.MsgMintNFTResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// WhichOneof reports which field within the oneof is populated,
+// returning nil if none are populated.
+// It panics if the oneof descriptor does not belong to this message.
+func (x *fastReflection_MsgMintNFTResponse) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+	switch d.FullName() {
+	default:
+		panic(fmt.Errorf("%s is not a oneof field in fractionnft.v1.MsgMintNFTResponse", d.FullName()))
+	}
+	panic("unreachable")
+}
+
+// GetUnknown retrieves the entire list of unknown fields.
+// The caller may only mutate the contents of the RawFields
+// if the mutated bytes are stored back into the message with SetUnknown.
+func (x *fastReflection_MsgMintNFTResponse) GetUnknown() protoreflect.RawFields {
+	return x.unknownFields
+}
+
+// SetUnknown stores an entire list of unknown fields.
+// The raw fields must be syntactically valid according to the wire format.
+// An implementation may panic if this is not the case.
+// Once stored, the caller must not mutate the content of the RawFields.
+// An empty RawFields may be passed to clear the fields.
+//
+// SetUnknown is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_MsgMintNFTResponse) SetUnknown(fields protoreflect.RawFields) {
+	x.unknownFields = fields
+}
+
+// IsValid reports whether the message is valid.
+//
+// An invalid message is an empty, read-only value.
+//
+// An invalid message often corresponds to a nil pointer of the concrete
+// message type, but the details are implementation dependent.
+// Validity is not part of the protobuf data model, and may not
+// be preserved in marshaling or other operations.
+func (x *fastReflection_MsgMintNFTResponse) IsValid() bool {
+	return x != nil
+}
+
+// ProtoMethods returns optional fastReflectionFeature-path implementations of various operations.
+// This method may return nil.
+//
+// The returned methods type is identical to
+// "google.golang.org/protobuf/runtime/protoiface".Methods.
+// Consult the protoiface package documentation for details.
+func (x *fastReflection_MsgMintNFTResponse) ProtoMethods() *protoiface.Methods {
+	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
+		x := input.Message.Interface().(*MsgMintNFTResponse)
+		if x == nil {
+			return protoiface.SizeOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Size:              0,
+			}
+		}
+		options := runtime.SizeInputToOptions(input)
+		_ = options
+		var n int
+		var l int
+		_ = l
+		if x.unknownFields != nil {
+			n += len(x.unknownFields)
+		}
+		return protoiface.SizeOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Size:              n,
+		}
+	}
+
+	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
+		x := input.Message.Interface().(*MsgMintNFTResponse)
+		if x == nil {
+			return protoiface.MarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Buf:               input.Buf,
+			}, nil
+		}
+		options := runtime.MarshalInputToOptions(input)
+		_ = options
+		size := options.Size(x)
+		dAtA := make([]byte, size)
+		i := len(dAtA)
+		_ = i
+		var l int
+		_ = l
+		if x.unknownFields != nil {
+			i -= len(x.unknownFields)
+			copy(dAtA[i:], x.unknownFields)
+		}
+		if input.Buf != nil {
+			input.Buf = append(input.Buf, dAtA...)
+		} else {
+			input.Buf = dAtA
+		}
+		return protoiface.MarshalOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Buf:               input.Buf,
+		}, nil
+	}
+	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
+		x := input.Message.Interface().(*MsgMintNFTResponse)
+		if x == nil {
+			return protoiface.UnmarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Flags:             input.Flags,
+			}, nil
+		}
+		options := runtime.UnmarshalInputToOptions(input)
+		_ = options
+		dAtA := input.Buf
+		l := len(dAtA)
+		iNdEx := 0
+		for iNdEx < l {
+			preIndex := iNdEx
+			var wire uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				wire |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			fieldNum := int32(wire >> 3)
+			wireType := int(wire & 0x7)
+			if wireType == 4 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgMintNFTResponse: wiretype end group for non-group")
+			}
+			if fieldNum <= 0 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgMintNFTResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			}
+			switch fieldNum {
+			default:
+				iNdEx = preIndex
+				skippy, err := runtime.Skip(dAtA[iNdEx:])
+				if err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				if (skippy < 0) || (iNdEx+skippy) < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if (iNdEx + skippy) > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if !options.DiscardUnknown {
+					x.unknownFields = append(x.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+				}
+				iNdEx += skippy
+			}
+		}
+
+		if iNdEx > l {
+			return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+		}
+		return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, nil
+	}
+	return &protoiface.Methods{
+		NoUnkeyedLiterals: struct{}{},
+		Flags:             protoiface.SupportMarshalDeterministic | protoiface.SupportUnmarshalDiscardUnknown,
+		Size:              size,
+		Marshal:           marshal,
+		Unmarshal:         unmarshal,
+		Merge:             nil,
+		CheckInitialized:  nil,
+	}
+}
+
 // Code generated by protoc-gen-go. DO NOT EDIT.
 // versions:
 // 	protoc-gen-go v1.27.0
@@ -3037,6 +4133,107 @@ func (*MsgRemintNFTResponse) Descriptor() ([]byte, []int) {
 	return file_fractionnft_v1_tx_proto_rawDescGZIP(), []int{5}
 }
 
+type MsgMintNFTParams struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Owner       string `protobuf:"bytes,1,opt,name=owner,proto3" json:"owner,omitempty"`
+	Name        string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Id          string `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	Image       string `protobuf:"bytes,5,opt,name=image,proto3" json:"image,omitempty"`
+	Category    string `protobuf:"bytes,6,opt,name=category,proto3" json:"category,omitempty"`
+}
+
+func (x *MsgMintNFTParams) Reset() {
+	*x = MsgMintNFTParams{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_fractionnft_v1_tx_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MsgMintNFTParams) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MsgMintNFTParams) ProtoMessage() {}
+
+// Deprecated: Use MsgMintNFTParams.ProtoReflect.Descriptor instead.
+func (*MsgMintNFTParams) Descriptor() ([]byte, []int) {
+	return file_fractionnft_v1_tx_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *MsgMintNFTParams) GetOwner() string {
+	if x != nil {
+		return x.Owner
+	}
+	return ""
+}
+
+func (x *MsgMintNFTParams) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *MsgMintNFTParams) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *MsgMintNFTParams) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *MsgMintNFTParams) GetImage() string {
+	if x != nil {
+		return x.Image
+	}
+	return ""
+}
+
+func (x *MsgMintNFTParams) GetCategory() string {
+	if x != nil {
+		return x.Category
+	}
+	return ""
+}
+
+type MsgMintNFTResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *MsgMintNFTResponse) Reset() {
+	*x = MsgMintNFTResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_fractionnft_v1_tx_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MsgMintNFTResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MsgMintNFTResponse) ProtoMessage() {}
+
+// Deprecated: Use MsgMintNFTResponse.ProtoReflect.Descriptor instead.
+func (*MsgMintNFTResponse) Descriptor() ([]byte, []int) {
+	return file_fractionnft_v1_tx_proto_rawDescGZIP(), []int{7}
+}
+
 var File_fractionnft_v1_tx_proto protoreflect.FileDescriptor
 
 var file_fractionnft_v1_tx_proto_rawDesc = []byte{
@@ -3084,37 +4281,57 @@ var file_fractionnft_v1_tx_proto_rawDesc = []byte{
 	0x66, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x6e, 0x66, 0x74,
 	0x49, 0x64, 0x3a, 0x0a, 0x82, 0xe7, 0xb0, 0x2a, 0x05, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x22, 0x16,
 	0x0a, 0x14, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x6d, 0x69, 0x6e, 0x74, 0x4e, 0x46, 0x54, 0x52, 0x65,
-	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32, 0xa0, 0x02, 0x0a, 0x03, 0x4d, 0x73, 0x67, 0x12, 0x58,
-	0x0a, 0x0c, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x1f,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0xc6, 0x01, 0x0a, 0x10, 0x4d, 0x73, 0x67, 0x4d, 0x69,
+	0x6e, 0x74, 0x4e, 0x46, 0x54, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x2e, 0x0a, 0x05, 0x6f,
+	0x77, 0x6e, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14,
+	0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74,
+	0x72, 0x69, 0x6e, 0x67, 0x52, 0x05, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x12, 0x12, 0x0a, 0x04, 0x6e,
+	0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12,
+	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12,
+	0x20, 0x0a, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x04,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f,
+	0x6e, 0x12, 0x14, 0x0a, 0x05, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x05, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x63, 0x61, 0x74, 0x65, 0x67,
+	0x6f, 0x72, 0x79, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x63, 0x61, 0x74, 0x65, 0x67,
+	0x6f, 0x72, 0x79, 0x3a, 0x0a, 0x82, 0xe7, 0xb0, 0x2a, 0x05, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x22,
+	0x14, 0x0a, 0x12, 0x4d, 0x73, 0x67, 0x4d, 0x69, 0x6e, 0x74, 0x4e, 0x46, 0x54, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32, 0xf4, 0x02, 0x0a, 0x03, 0x4d, 0x73, 0x67, 0x12, 0x58, 0x0a,
+	0x0c, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x1f, 0x2e,
+	0x66, 0x72, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x6e, 0x66, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x4d,
+	0x73, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x1a, 0x27,
 	0x2e, 0x66, 0x72, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x6e, 0x66, 0x74, 0x2e, 0x76, 0x31, 0x2e,
-	0x4d, 0x73, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x1a,
-	0x27, 0x2e, 0x66, 0x72, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x6e, 0x66, 0x74, 0x2e, 0x76, 0x31,
-	0x2e, 0x4d, 0x73, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x5e, 0x0a, 0x0e, 0x4d, 0x73, 0x67, 0x54,
-	0x6f, 0x6b, 0x65, 0x6e, 0x69, 0x7a, 0x65, 0x4e, 0x46, 0x54, 0x12, 0x24, 0x2e, 0x66, 0x72, 0x61,
-	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x6e, 0x66, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x54,
-	0x6f, 0x6b, 0x65, 0x6e, 0x69, 0x7a, 0x65, 0x4e, 0x46, 0x54, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73,
-	0x1a, 0x26, 0x2e, 0x66, 0x72, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x6e, 0x66, 0x74, 0x2e, 0x76,
-	0x31, 0x2e, 0x4d, 0x73, 0x67, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x69, 0x7a, 0x65, 0x4e, 0x46, 0x54,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x58, 0x0a, 0x0c, 0x4d, 0x73, 0x67, 0x52,
-	0x65, 0x6d, 0x69, 0x6e, 0x74, 0x4e, 0x46, 0x54, 0x12, 0x22, 0x2e, 0x66, 0x72, 0x61, 0x63, 0x74,
-	0x69, 0x6f, 0x6e, 0x6e, 0x66, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x6d,
-	0x69, 0x6e, 0x74, 0x4e, 0x46, 0x54, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x1a, 0x24, 0x2e, 0x66,
-	0x72, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x6e, 0x66, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73,
-	0x67, 0x52, 0x65, 0x6d, 0x69, 0x6e, 0x74, 0x4e, 0x46, 0x54, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
-	0x73, 0x65, 0x1a, 0x05, 0x80, 0xe7, 0xb0, 0x2a, 0x01, 0x42, 0xbc, 0x01, 0x0a, 0x12, 0x63, 0x6f,
-	0x6d, 0x2e, 0x66, 0x72, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x6e, 0x66, 0x74, 0x2e, 0x76, 0x31,
-	0x42, 0x07, 0x54, 0x78, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x44, 0x67, 0x69, 0x74,
-	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x4d, 0x41, 0x4e, 0x54, 0x52, 0x41, 0x2d, 0x43,
-	0x68, 0x61, 0x69, 0x6e, 0x2f, 0x6d, 0x61, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x68, 0x61, 0x69, 0x6e,
-	0x2f, 0x61, 0x70, 0x69, 0x2f, 0x66, 0x72, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x6e, 0x66, 0x74,
-	0x2f, 0x76, 0x31, 0x3b, 0x66, 0x72, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x6e, 0x66, 0x74, 0x76,
-	0x31, 0xa2, 0x02, 0x03, 0x46, 0x58, 0x58, 0xaa, 0x02, 0x0e, 0x46, 0x72, 0x61, 0x63, 0x74, 0x69,
-	0x6f, 0x6e, 0x6e, 0x66, 0x74, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x0e, 0x46, 0x72, 0x61, 0x63, 0x74,
-	0x69, 0x6f, 0x6e, 0x6e, 0x66, 0x74, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x1a, 0x46, 0x72, 0x61, 0x63,
-	0x74, 0x69, 0x6f, 0x6e, 0x6e, 0x66, 0x74, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65,
-	0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0f, 0x46, 0x72, 0x61, 0x63, 0x74, 0x69, 0x6f,
-	0x6e, 0x6e, 0x66, 0x74, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x4d, 0x73, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x5e, 0x0a, 0x0e, 0x4d, 0x73, 0x67, 0x54, 0x6f,
+	0x6b, 0x65, 0x6e, 0x69, 0x7a, 0x65, 0x4e, 0x46, 0x54, 0x12, 0x24, 0x2e, 0x66, 0x72, 0x61, 0x63,
+	0x74, 0x69, 0x6f, 0x6e, 0x6e, 0x66, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x54, 0x6f,
+	0x6b, 0x65, 0x6e, 0x69, 0x7a, 0x65, 0x4e, 0x46, 0x54, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x1a,
+	0x26, 0x2e, 0x66, 0x72, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x6e, 0x66, 0x74, 0x2e, 0x76, 0x31,
+	0x2e, 0x4d, 0x73, 0x67, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x69, 0x7a, 0x65, 0x4e, 0x46, 0x54, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x58, 0x0a, 0x0c, 0x4d, 0x73, 0x67, 0x52, 0x65,
+	0x6d, 0x69, 0x6e, 0x74, 0x4e, 0x46, 0x54, 0x12, 0x22, 0x2e, 0x66, 0x72, 0x61, 0x63, 0x74, 0x69,
+	0x6f, 0x6e, 0x6e, 0x66, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x6d, 0x69,
+	0x6e, 0x74, 0x4e, 0x46, 0x54, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x1a, 0x24, 0x2e, 0x66, 0x72,
+	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x6e, 0x66, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67,
+	0x52, 0x65, 0x6d, 0x69, 0x6e, 0x74, 0x4e, 0x46, 0x54, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x12, 0x52, 0x0a, 0x0a, 0x4d, 0x73, 0x67, 0x4d, 0x69, 0x6e, 0x74, 0x4e, 0x46, 0x54, 0x12,
+	0x20, 0x2e, 0x66, 0x72, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x6e, 0x66, 0x74, 0x2e, 0x76, 0x31,
+	0x2e, 0x4d, 0x73, 0x67, 0x4d, 0x69, 0x6e, 0x74, 0x4e, 0x46, 0x54, 0x50, 0x61, 0x72, 0x61, 0x6d,
+	0x73, 0x1a, 0x22, 0x2e, 0x66, 0x72, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x6e, 0x66, 0x74, 0x2e,
+	0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x4d, 0x69, 0x6e, 0x74, 0x4e, 0x46, 0x54, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x1a, 0x05, 0x80, 0xe7, 0xb0, 0x2a, 0x01, 0x42, 0xbc, 0x01, 0x0a,
+	0x12, 0x63, 0x6f, 0x6d, 0x2e, 0x66, 0x72, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x6e, 0x66, 0x74,
+	0x2e, 0x76, 0x31, 0x42, 0x07, 0x54, 0x78, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x44,
+	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x4d, 0x41, 0x4e, 0x54, 0x52,
+	0x41, 0x2d, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x2f, 0x6d, 0x61, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x68,
+	0x61, 0x69, 0x6e, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x66, 0x72, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e,
+	0x6e, 0x66, 0x74, 0x2f, 0x76, 0x31, 0x3b, 0x66, 0x72, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x6e,
+	0x66, 0x74, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x46, 0x58, 0x58, 0xaa, 0x02, 0x0e, 0x46, 0x72, 0x61,
+	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x6e, 0x66, 0x74, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x0e, 0x46, 0x72,
+	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x6e, 0x66, 0x74, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x1a, 0x46,
+	0x72, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x6e, 0x66, 0x74, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50,
+	0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0f, 0x46, 0x72, 0x61, 0x63,
+	0x74, 0x69, 0x6f, 0x6e, 0x6e, 0x66, 0x74, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (
@@ -3129,7 +4346,7 @@ func file_fractionnft_v1_tx_proto_rawDescGZIP() []byte {
 	return file_fractionnft_v1_tx_proto_rawDescData
 }
 
-var file_fractionnft_v1_tx_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_fractionnft_v1_tx_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_fractionnft_v1_tx_proto_goTypes = []interface{}{
 	(*MsgUpdateParams)(nil),         // 0: fractionnft.v1.MsgUpdateParams
 	(*MsgUpdateParamsResponse)(nil), // 1: fractionnft.v1.MsgUpdateParamsResponse
@@ -3137,18 +4354,22 @@ var file_fractionnft_v1_tx_proto_goTypes = []interface{}{
 	(*MsgTokenizeNFTResponse)(nil),  // 3: fractionnft.v1.MsgTokenizeNFTResponse
 	(*MsgRemintNFTParams)(nil),      // 4: fractionnft.v1.MsgRemintNFTParams
 	(*MsgRemintNFTResponse)(nil),    // 5: fractionnft.v1.MsgRemintNFTResponse
-	(*Params)(nil),                  // 6: fractionnft.v1.Params
+	(*MsgMintNFTParams)(nil),        // 6: fractionnft.v1.MsgMintNFTParams
+	(*MsgMintNFTResponse)(nil),      // 7: fractionnft.v1.MsgMintNFTResponse
+	(*Params)(nil),                  // 8: fractionnft.v1.Params
 }
 var file_fractionnft_v1_tx_proto_depIdxs = []int32{
-	6, // 0: fractionnft.v1.MsgUpdateParams.params:type_name -> fractionnft.v1.Params
+	8, // 0: fractionnft.v1.MsgUpdateParams.params:type_name -> fractionnft.v1.Params
 	0, // 1: fractionnft.v1.Msg.UpdateParams:input_type -> fractionnft.v1.MsgUpdateParams
 	2, // 2: fractionnft.v1.Msg.MsgTokenizeNFT:input_type -> fractionnft.v1.MsgTokenizeNFTParams
 	4, // 3: fractionnft.v1.Msg.MsgRemintNFT:input_type -> fractionnft.v1.MsgRemintNFTParams
-	1, // 4: fractionnft.v1.Msg.UpdateParams:output_type -> fractionnft.v1.MsgUpdateParamsResponse
-	3, // 5: fractionnft.v1.Msg.MsgTokenizeNFT:output_type -> fractionnft.v1.MsgTokenizeNFTResponse
-	5, // 6: fractionnft.v1.Msg.MsgRemintNFT:output_type -> fractionnft.v1.MsgRemintNFTResponse
-	4, // [4:7] is the sub-list for method output_type
-	1, // [1:4] is the sub-list for method input_type
+	6, // 4: fractionnft.v1.Msg.MsgMintNFT:input_type -> fractionnft.v1.MsgMintNFTParams
+	1, // 5: fractionnft.v1.Msg.UpdateParams:output_type -> fractionnft.v1.MsgUpdateParamsResponse
+	3, // 6: fractionnft.v1.Msg.MsgTokenizeNFT:output_type -> fractionnft.v1.MsgTokenizeNFTResponse
+	5, // 7: fractionnft.v1.Msg.MsgRemintNFT:output_type -> fractionnft.v1.MsgRemintNFTResponse
+	7, // 8: fractionnft.v1.Msg.MsgMintNFT:output_type -> fractionnft.v1.MsgMintNFTResponse
+	5, // [5:9] is the sub-list for method output_type
+	1, // [1:5] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
 	1, // [1:1] is the sub-list for extension extendee
 	0, // [0:1] is the sub-list for field type_name
@@ -3233,6 +4454,30 @@ func file_fractionnft_v1_tx_proto_init() {
 				return nil
 			}
 		}
+		file_fractionnft_v1_tx_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MsgMintNFTParams); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_fractionnft_v1_tx_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MsgMintNFTResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -3240,7 +4485,7 @@ func file_fractionnft_v1_tx_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_fractionnft_v1_tx_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

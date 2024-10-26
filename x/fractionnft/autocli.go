@@ -12,11 +12,6 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 			Service: modulev1.Query_ServiceDesc.ServiceName,
 			RpcCommandOptions: []*autocliv1.RpcCommandOptions{
 				{
-					RpcMethod: "Params",
-					Use:       "params",
-					Short:     "Query the current consensus parameters",
-				},
-				{
                     RpcMethod: "GetNftToken",
                     Use:       "get <class_id> <nft_id>",
                     Short:     "Get nfttoken",
@@ -30,10 +25,6 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 		Tx: &autocliv1.ServiceCommandDescriptor{
 			Service: modulev1.Msg_ServiceDesc.ServiceName,
 			RpcCommandOptions: []*autocliv1.RpcCommandOptions{
-				{
-					RpcMethod: "UpdateParams",
-					Skip:      false, // set to true if authority gated
-				},
 				{
                     RpcMethod: "MsgTokenizeNFT",
                     Use:       "tokenize <class_id> <nft_id> <token_supply> <timeout_height>",
@@ -52,6 +43,18 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
                     PositionalArgs: []*autocliv1.PositionalArgDescriptor{
                         {ProtoField: "class_id"},
 						{ProtoField: "nft_id"},
+                    },
+                },
+				{
+                    RpcMethod: "MsgMintNFT",
+                    Use:       "mint ",
+                    Short:     "Mint nfttoken",
+                    PositionalArgs: []*autocliv1.PositionalArgDescriptor{
+                        {ProtoField: "name"},
+						{ProtoField: "id"},
+						{ProtoField: "description"},
+						{ProtoField: "image"},
+						{ProtoField: "category"},
                     },
                 },
 			},

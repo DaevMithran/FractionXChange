@@ -22,6 +22,7 @@ const (
 	Msg_UpdateParams_FullMethodName   = "/fractionnft.v1.Msg/UpdateParams"
 	Msg_MsgTokenizeNFT_FullMethodName = "/fractionnft.v1.Msg/MsgTokenizeNFT"
 	Msg_MsgRemintNFT_FullMethodName   = "/fractionnft.v1.Msg/MsgRemintNFT"
+	Msg_MsgMintNFT_FullMethodName     = "/fractionnft.v1.Msg/MsgMintNFT"
 )
 
 // MsgClient is the client API for Msg service.
@@ -36,6 +37,7 @@ type MsgClient interface {
 	UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error)
 	MsgTokenizeNFT(ctx context.Context, in *MsgTokenizeNFTParams, opts ...grpc.CallOption) (*MsgTokenizeNFTResponse, error)
 	MsgRemintNFT(ctx context.Context, in *MsgRemintNFTParams, opts ...grpc.CallOption) (*MsgRemintNFTResponse, error)
+	MsgMintNFT(ctx context.Context, in *MsgMintNFTParams, opts ...grpc.CallOption) (*MsgMintNFTResponse, error)
 }
 
 type msgClient struct {
@@ -76,6 +78,16 @@ func (c *msgClient) MsgRemintNFT(ctx context.Context, in *MsgRemintNFTParams, op
 	return out, nil
 }
 
+func (c *msgClient) MsgMintNFT(ctx context.Context, in *MsgMintNFTParams, opts ...grpc.CallOption) (*MsgMintNFTResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MsgMintNFTResponse)
+	err := c.cc.Invoke(ctx, Msg_MsgMintNFT_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility.
@@ -88,6 +100,7 @@ type MsgServer interface {
 	UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error)
 	MsgTokenizeNFT(context.Context, *MsgTokenizeNFTParams) (*MsgTokenizeNFTResponse, error)
 	MsgRemintNFT(context.Context, *MsgRemintNFTParams) (*MsgRemintNFTResponse, error)
+	MsgMintNFT(context.Context, *MsgMintNFTParams) (*MsgMintNFTResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -106,6 +119,9 @@ func (UnimplementedMsgServer) MsgTokenizeNFT(context.Context, *MsgTokenizeNFTPar
 }
 func (UnimplementedMsgServer) MsgRemintNFT(context.Context, *MsgRemintNFTParams) (*MsgRemintNFTResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MsgRemintNFT not implemented")
+}
+func (UnimplementedMsgServer) MsgMintNFT(context.Context, *MsgMintNFTParams) (*MsgMintNFTResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MsgMintNFT not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 func (UnimplementedMsgServer) testEmbeddedByValue()             {}
@@ -182,6 +198,24 @@ func _Msg_MsgRemintNFT_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_MsgMintNFT_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgMintNFTParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).MsgMintNFT(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_MsgMintNFT_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).MsgMintNFT(ctx, req.(*MsgMintNFTParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -200,6 +234,10 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MsgRemintNFT",
 			Handler:    _Msg_MsgRemintNFT_Handler,
+		},
+		{
+			MethodName: "MsgMintNFT",
+			Handler:    _Msg_MsgMintNFT_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

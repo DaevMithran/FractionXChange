@@ -28,7 +28,7 @@ func (s *AnteTestSuite) TestAnteMsgFilterLogic() {
 	acc := sdk.AccAddress(secp256k1.GenPrivKey().PubKey().Address())
 
 	// test blocking any BankSend Messages
-	ante := decorators.FilterDecorator(&banktypes.MsgSend{})
+	ante := decorators.FilterDecorator()
 	msg := banktypes.NewMsgSend(
 		acc,
 		acc,
