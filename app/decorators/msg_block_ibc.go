@@ -22,9 +22,7 @@ type MsgFilterDecorator struct {
 // - decorators.FilterDecorator(&banktypes.MsgSend{})
 // This would block any MsgSend messages from being included in a transaction if set in ante.go
 func FilterDecorator() MsgFilterDecorator {
-	return MsgFilterDecorator{
-
-	}
+	return MsgFilterDecorator{}
 }
 
 func (mfd MsgFilterDecorator) AnteHandle(ctx sdk.Context, tx sdk.Tx, simulate bool, next sdk.AnteHandler) (newCtx sdk.Context, err error) {
@@ -54,7 +52,7 @@ func (mfd MsgFilterDecorator) HasDisallowedMessage(ctx sdk.Context, msgs []sdk.M
 				return true
 			}
 		}
-		
+
 	}
 
 	return false

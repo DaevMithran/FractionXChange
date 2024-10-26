@@ -30,14 +30,14 @@ func (k Querier) Params(c context.Context, req *types.QueryParamsRequest) (*type
 }
 
 func (k Querier) GetNftToken(goCtx context.Context, req *types.QueryGetNftTokenRequest) (*types.QueryNftTokenResponse, error) {
-	denom := "fractionNFT-"+req.ClassId+"-"+req.NftId
-	nftres,  err := k.Keeper.NFTMapping.Get(goCtx, denom)
+	denom := "fractionNFT-" + req.ClassId + "-" + req.NftId
+	nftres, err := k.Keeper.NFTMapping.Get(goCtx, denom)
 	if err != nil {
 		return nil, err
 	}
 
 	return &types.QueryNftTokenResponse{
-		Owner: nftres.Owner,
+		Owner:         nftres.Owner,
 		TimeoutHeight: nftres.TimeoutHeight,
 	}, nil
 

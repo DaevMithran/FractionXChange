@@ -36,7 +36,7 @@ var maccPerms = map[string][]string{
 	stakingtypes.NotBondedPoolName: {authtypes.Burner, authtypes.Staking},
 	minttypes.ModuleName:           {authtypes.Minter},
 	govtypes.ModuleName:            {authtypes.Burner},
-	types.ModuleName:  {authtypes.Minter, authtypes.Burner},
+	types.ModuleName:               {authtypes.Minter, authtypes.Burner},
 }
 
 type testFixture struct {
@@ -49,7 +49,7 @@ type testFixture struct {
 	appModule   *module.AppModule
 
 	accountkeeper authkeeper.AccountKeeper
-	nftkeeper    nftkeeper.Keeper
+	nftkeeper     nftkeeper.Keeper
 	bankkeeper    bankkeeper.BaseKeeper
 	stakingKeeper *stakingkeeper.Keeper
 	mintkeeper    mintkeeper.Keeper

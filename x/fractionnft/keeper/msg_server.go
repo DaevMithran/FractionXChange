@@ -44,7 +44,6 @@ func (ms msgServer) MsgTokenizeNFT(ctx context.Context, msg *types.MsgTokenizeNF
 	return &types.MsgTokenizeNFTResponse{}, nil
 }
 
-
 // MsgTokenizeNFT implements types.MsgServer.
 func (ms msgServer) MsgRemintNFT(ctx context.Context, msg *types.MsgRemintNFTParams) (*types.MsgRemintNFTResponse, error) {
 	owner, err := ms.k.addressCodec.StringToBytes(msg.Owner)
@@ -59,7 +58,6 @@ func (ms msgServer) MsgRemintNFT(ctx context.Context, msg *types.MsgRemintNFTPar
 	return &types.MsgRemintNFTResponse{}, nil
 }
 
-
 func (ms msgServer) MsgMintNFT(ctx context.Context, msg *types.MsgMintNFTParams) (*types.MsgMintNFTResponse, error) {
 	owner, err := ms.k.addressCodec.StringToBytes(msg.Owner)
 	if err != nil {
@@ -72,4 +70,3 @@ func (ms msgServer) MsgMintNFT(ctx context.Context, msg *types.MsgMintNFTParams)
 	}
 	return &types.MsgMintNFTResponse{}, nil
 }
-

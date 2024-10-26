@@ -29,7 +29,7 @@ import (
 )
 
 type Keeper struct {
-	cdc codec.BinaryCodec
+	cdc          codec.BinaryCodec
 	addressCodec address.Codec
 
 	logger log.Logger
@@ -44,8 +44,8 @@ type Keeper struct {
 	NFTMapping collections.Map[string, types.TokenizedNFT]
 
 	AccountKeeper authkeeper.AccountKeeper
-	Nftkeeper nftkeeper.Keeper
-	BankKeeper bankkeeper.Keeper
+	Nftkeeper     nftkeeper.Keeper
+	BankKeeper    bankkeeper.Keeper
 }
 
 // NewKeeper creates a new Keeper instance
@@ -77,12 +77,10 @@ func NewKeeper(
 		panic(err)
 	}
 
-	
-
 	k := Keeper{
-		cdc:    cdc,
+		cdc:          cdc,
 		addressCodec: addressCodec,
-		logger: logger,
+		logger:       logger,
 
 		Params: collections.NewItem(sb, types.ParamsKey, "params", codec.CollValue[types.Params](cdc)),
 		OrmDB:  store,
@@ -92,8 +90,8 @@ func NewKeeper(
 		NFTMapping: collections.NewMap(sb, collections.NewPrefix(1), "nft_mapping", collections.StringKey, codec.CollValue[types.TokenizedNFT](cdc)),
 
 		AccountKeeper: accountKepper,
-		Nftkeeper: nftKeeper,
-		BankKeeper: bankKeeper,
+		Nftkeeper:     nftKeeper,
+		BankKeeper:    bankKeeper,
 	}
 
 	schema, err := sb.Build()
@@ -134,37 +132,37 @@ func (k *Keeper) ExportGenesis(ctx context.Context) *types.GenesisState {
 
 func (k *Keeper) TokenizeNFT(ctx context.Context, classId string, nftId string, sender sdk.AccAddress, tokenSupply int64, timeoutHeight int64) error {
 	if !k.Nftkeeper.HasClass(ctx, classId) {
-        return fmt.Errorf("NFT class not found: %s", classId)
+		return fmt.Errorf("NFT class not found: %s", classId)
 	}
 
 	if !k.Nftkeeper.HasNFT(ctx, classId, nftId) {
-        return fmt.Errorf("NFT not found: %s", nftId)
+		return fmt.Errorf("NFT not found: %s", nftId)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(ctx)
 	blockHeight := sdkCtx.BlockHeight()
 	// Restricting timeout: timeout should be alteast greater than 3 blocks
-	if blockHeight + 3 >= timeoutHeight {
+	if blockHeight+3 >= timeoutHeight {
 		return fmt.Errorf("timeout should be greater than curent blockHeight %d", blockHeight)
 	}
 
-	denom := "fractionNFT-"+classId+"-"+nftId
-	
+	denom := "fractionNFT-" + classId + "-" + nftId
+
 	// validate if NFT is tokenized already
-    has, err := k.NFTMapping.Has(ctx, denom)
-    if err != nil {
-        return err
-    }
-    if has {
-        return fmt.Errorf("NFT is tokenized already : %s", denom)
-    }
+	has, err := k.NFTMapping.Has(ctx, denom)
+	if err != nil {
+		return err
+	}
+	if has {
+		return fmt.Errorf("NFT is tokenized already : %s", denom)
+	}
 
 	// Lock the NFT in module address
 	// Note: Owner validation is done within the Send function
-	_, err = k.Nftkeeper.Send(ctx, &nft.MsgSend {
-		ClassId: classId, 
-		Id: nftId, 
-		Sender: sender.String(),
+	_, err = k.Nftkeeper.Send(ctx, &nft.MsgSend{
+		ClassId:  classId,
+		Id:       nftId,
+		Sender:   sender.String(),
 		Receiver: authtypes.NewModuleAddress(types.ModuleName).String(),
 	})
 	if err != nil {
@@ -172,7 +170,7 @@ func (k *Keeper) TokenizeNFT(ctx context.Context, classId string, nftId string, 
 	}
 
 	coins := sdk.NewCoins(sdk.NewCoin(denom, math.NewInt(tokenSupply)))
-	
+
 	// tokenize NFT to create new coins
 	err = k.BankKeeper.MintCoins(ctx, types.ModuleName, coins)
 	if err != nil {
@@ -186,19 +184,19 @@ func (k *Keeper) TokenizeNFT(ctx context.Context, classId string, nftId string, 
 	}
 
 	return k.NFTMapping.Set(ctx, denom, types.TokenizedNFT{
-		Owner: sender.String(),
+		Owner:         sender.String(),
 		TimeoutHeight: timeoutHeight,
 	})
 }
 
-func(k *Keeper) RemintNFT(ctx context.Context, classId string, nftId string, sender sdk.AccAddress) error {
-	denom := "fractionNFT-"+classId+"-"+nftId
-	
+func (k *Keeper) RemintNFT(ctx context.Context, classId string, nftId string, sender sdk.AccAddress) error {
+	denom := "fractionNFT-" + classId + "-" + nftId
+
 	// validate if NFT is tokenized already
-    tokenizedNFT, err := k.NFTMapping.Get(ctx, denom)
-    if err != nil {
-        return err
-    }
+	tokenizedNFT, err := k.NFTMapping.Get(ctx, denom)
+	if err != nil {
+		return err
+	}
 
 	// validate block height
 	sdkCtx := sdk.UnwrapSDKContext(ctx)
@@ -207,40 +205,40 @@ func(k *Keeper) RemintNFT(ctx context.Context, classId string, nftId string, sen
 	fmt.Printf("senderStr %s\n", senderStr)
 	fmt.Printf("moduleAddr %s", authtypes.NewModuleAddress(types.ModuleName).String())
 	switch senderStr {
-		case authtypes.NewModuleAddress(types.ModuleName).String():
-			if blockHeight < tokenizedNFT.TimeoutHeight {
-				return fmt.Errorf("remint can be performed on timeout: %s", denom)
-			}
-			// Burn tokens in the denom
-			err = k.BurnAllTokensOfDenom(sdkCtx, denom)
-			if err != nil {
-				return err
-			}
-		case tokenizedNFT.Owner:
-			supply := k.BankKeeper.GetSupply(ctx, denom)
-			balance := k.BankKeeper.GetBalance(ctx, sender, denom)
+	case authtypes.NewModuleAddress(types.ModuleName).String():
+		if blockHeight < tokenizedNFT.TimeoutHeight {
+			return fmt.Errorf("remint can be performed on timeout: %s", denom)
+		}
+		// Burn tokens in the denom
+		err = k.BurnAllTokensOfDenom(sdkCtx, denom)
+		if err != nil {
+			return err
+		}
+	case tokenizedNFT.Owner:
+		supply := k.BankKeeper.GetSupply(ctx, denom)
+		balance := k.BankKeeper.GetBalance(ctx, sender, denom)
 
-			if !supply.Amount.Equal(balance.Amount) {
-				return fmt.Errorf("remint can be called by owner only if they own all the tokens: %s", denom)
-			}
+		if !supply.Amount.Equal(balance.Amount) {
+			return fmt.Errorf("remint can be called by owner only if they own all the tokens: %s", denom)
+		}
 
-			coins := sdk.NewCoins(balance)
+		coins := sdk.NewCoins(balance)
 
-			err = k.BankKeeper.SendCoinsFromAccountToModule(ctx, sender, types.ModuleName, coins)
-			if err != nil {
-				return err
-			}
+		err = k.BankKeeper.SendCoinsFromAccountToModule(ctx, sender, types.ModuleName, coins)
+		if err != nil {
+			return err
+		}
 
-			k.BankKeeper.BurnCoins(ctx, types.ModuleName, coins)
-		default:
-			return fmt.Errorf("unauthorized sender: %s", senderStr)
+		k.BankKeeper.BurnCoins(ctx, types.ModuleName, coins)
+	default:
+		return fmt.Errorf("unauthorized sender: %s", senderStr)
 	}
 
 	// Transfer NFT back to the owner
-	_, err = k.Nftkeeper.Send(ctx, &nft.MsgSend {
-		ClassId: classId, 
-		Id: nftId, 
-		Sender: authtypes.NewModuleAddress(types.ModuleName).String(),
+	_, err = k.Nftkeeper.Send(ctx, &nft.MsgSend{
+		ClassId:  classId,
+		Id:       nftId,
+		Sender:   authtypes.NewModuleAddress(types.ModuleName).String(),
 		Receiver: tokenizedNFT.Owner,
 	})
 	if err != nil {
@@ -253,30 +251,30 @@ func(k *Keeper) RemintNFT(ctx context.Context, classId string, nftId string, sen
 
 func (k Keeper) BurnAllTokensOfDenom(ctx sdk.Context, denom string) error {
 	fmt.Printf("Burning All tokens of Denom")
-	owners, err := k.BankKeeper.DenomOwners(ctx, &banktypes.QueryDenomOwnersRequest {
+	owners, err := k.BankKeeper.DenomOwners(ctx, &banktypes.QueryDenomOwnersRequest{
 		Denom: denom,
 	})
 	if err != nil {
 		return err
 	}
 
-	for _, owner:= range owners.DenomOwners {
-		addr, err :=sdk.AccAddressFromBech32(owner.Address)
+	for _, owner := range owners.DenomOwners {
+		addr, err := sdk.AccAddressFromBech32(owner.Address)
 		if err != nil {
 			return err
 		}
 		k.BankKeeper.SendCoinsFromAccountToModule(ctx, addr, types.ModuleName, sdk.NewCoins(owner.Balance))
 	}
 
-	coin :=k.BankKeeper.GetBalance(ctx, authtypes.NewModuleAddress(types.ModuleName), denom)
+	coin := k.BankKeeper.GetBalance(ctx, authtypes.NewModuleAddress(types.ModuleName), denom)
 	k.BankKeeper.BurnCoins(ctx, types.ModuleName, sdk.NewCoins(coin))
 
-    return nil
+	return nil
 }
 
 func (k Keeper) MintNFT(ctx context.Context, owner sdk.AccAddress, category string, id string, name string, description string, image string) error {
 	if !k.Nftkeeper.HasClass(ctx, category) {
-		k.Nftkeeper.SaveClass(ctx, nft.Class{ Id: category, Name: category })
+		k.Nftkeeper.SaveClass(ctx, nft.Class{Id: category, Name: category})
 	}
 
 	if k.Nftkeeper.HasNFT(ctx, category, id) {
@@ -285,23 +283,23 @@ func (k Keeper) MintNFT(ctx context.Context, owner sdk.AccAddress, category stri
 
 	coins := sdk.NewCoins(sdk.NewCoin("uom", math.NewInt(int64(5))))
 	// receive payment
-	err :=k.BankKeeper.SendCoinsFromAccountToModule(ctx, owner, types.ModuleName, coins)
-	if err !=nil {
+	err := k.BankKeeper.SendCoinsFromAccountToModule(ctx, owner, types.ModuleName, coins)
+	if err != nil {
 		return err
 	}
 
-	data, err := codectypes.NewAnyWithValue(&types.NFTData {
-		Name: name,
+	data, err := codectypes.NewAnyWithValue(&types.NFTData{
+		Name:        name,
 		Description: description,
-		Image: image,
+		Image:       image,
 	})
 	if err != nil {
 		return err
 	}
 
-	return k.Nftkeeper.Mint(ctx, nft.NFT {
+	return k.Nftkeeper.Mint(ctx, nft.NFT{
 		ClassId: category,
-		Id: id,
-		Data: data,
+		Id:      id,
+		Data:    data,
 	}, owner)
 }

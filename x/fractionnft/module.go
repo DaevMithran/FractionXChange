@@ -52,8 +52,8 @@ type AppModule struct {
 	keeper keeper.Keeper
 
 	accountKeeper authkeeper.AccountKeeper
-	nftKeeper nftkeeper.Keeper
-	bankKeeper bankkeeper.Keeper
+	nftKeeper     nftkeeper.Keeper
+	bankKeeper    bankkeeper.Keeper
 }
 
 // EndBlock implements module.HasABCIEndBlock.
@@ -75,7 +75,7 @@ func (am AppModule) EndBlock(ctx context.Context) ([]abci.ValidatorUpdate, error
 		if v.Value.TimeoutHeight == blockHeight {
 			splitted := strings.Split(v.Key, "-")
 			am.keeper.RemintNFT(ctx, splitted[1], splitted[2], authtypes.NewModuleAddress(types.ModuleName))
-		} 
+		}
 	}
 	return nil, nil
 }
@@ -119,9 +119,9 @@ func NewAppModule(
 	return &AppModule{
 		AppModuleBasic: AppModuleBasic{cdc: cdc},
 		keeper:         keeper,
-		accountKeeper: accountKeeper,
-		nftKeeper: nftKeeper,
-		bankKeeper: bankKeeper,
+		accountKeeper:  accountKeeper,
+		nftKeeper:      nftKeeper,
+		bankKeeper:     bankKeeper,
 	}
 }
 

@@ -50,8 +50,8 @@ type ModuleInputs struct {
 	SlashingKeeper slashingkeeper.Keeper
 
 	accountKepper authkeeper.AccountKeeper
-	nftKeeper nftkeeper.Keeper
-	bankKeeper bankkeeper.Keeper
+	nftKeeper     nftkeeper.Keeper
+	bankKeeper    bankkeeper.Keeper
 }
 
 type ModuleOutputs struct {

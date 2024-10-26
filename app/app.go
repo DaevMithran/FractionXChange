@@ -193,7 +193,7 @@ var maccPerms = map[string][]string{
 	feemarkettypes.ModuleName:       {authtypes.Burner},
 	feemarkettypes.FeeCollectorName: {authtypes.Burner},
 	oracletypes.ModuleName:          nil,
-	fractionnfttypes.ModuleName:  {authtypes.Minter, authtypes.Burner},
+	fractionnfttypes.ModuleName:     {authtypes.Minter, authtypes.Burner},
 }
 
 var (
@@ -260,7 +260,7 @@ type App struct {
 	// MANTRAChain keepers
 	TokenFactoryKeeper tokenfactorykeeper.Keeper
 	TaxKeeper          taxkeeper.Keeper
-	FractionnftKeeper fractionnftkeeper.Keeper
+	FractionnftKeeper  fractionnftkeeper.Keeper
 
 	// the module manager
 	ModuleManager      *module.Manager
@@ -788,7 +788,6 @@ func New(
 		tax.NewAppModule(appCodec, app.TaxKeeper),
 		feemarket.NewAppModule(appCodec, *app.FeeMarketKeeper),
 		fractionnft.NewAppModule(appCodec, app.FractionnftKeeper, app.AccountKeeper, app.NFTKeeper, app.BankKeeper),
-
 	)
 
 	// BasicModuleManager defines the module BasicManager is in charge of setting up basic,
