@@ -17,7 +17,7 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:     "Query the current consensus parameters",
 				},
 				{
-                    RpcMethod: "GetTokenizedNft",
+                    RpcMethod: "GetNftToken",
                     Use:       "get <class_id> <nft_id>",
                     Short:     "Get nfttoken",
                     PositionalArgs: []*autocliv1.PositionalArgDescriptor{

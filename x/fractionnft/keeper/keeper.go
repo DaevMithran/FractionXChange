@@ -200,9 +200,22 @@ func(k *Keeper) RemintNFT(ctx context.Context, classId string, nftId string, sen
 	// validate block height
 	sdkCtx := sdk.UnwrapSDKContext(ctx)
 	blockHeight := sdkCtx.BlockHeight()
+	senderStr := sender.String()
 
-	if blockHeight > tokenizedNFT.TimeoutHeight {
-      return fmt.Errorf("Remint can be called only after a block height: %s", denom)
+	switch senderStr {
+	case types.ModuleName:
+		if blockHeight < tokenizedNFT.TimeoutHeight {
+			return fmt.Errorf("remint can be performed on timeout: %s", denom)
+		}
+	case tokenizedNFT.Owner:
+		supply := k.BankKeeper.GetSupply(ctx, denom)
+		balance := k.BankKeeper.GetBalance(ctx, sender, denom)
+
+		if supply != balance {
+			return fmt.Errorf("remint can be called by owner only if they own all the tokens: %s", denom)
+		}
+	default:
+		return fmt.Errorf("unauthorized sender: %s", senderStr)
 	}
 
 	// Burn tokens in the denom
@@ -216,7 +229,7 @@ func(k *Keeper) RemintNFT(ctx context.Context, classId string, nftId string, sen
 		ClassId: classId, 
 		Id: nftId, 
 		Sender: types.ModuleName,
-		Receiver: sender.String(),
+		Receiver: tokenizedNFT.Owner,
 	})
 	if err != nil {
 		return err

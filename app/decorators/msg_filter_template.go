@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strings"
 
+	fractionnfttypes "github.com/MANTRA-Chain/mantrachain/x/fractionnft/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/authz"
 	ibctransfertypes "github.com/cosmos/ibc-go/v8/modules/apps/transfer/types"
@@ -49,7 +50,7 @@ func (mfd MsgFilterDecorator) HasDisallowedMessage(ctx sdk.Context, msgs []sdk.M
 			}
 		}
 		if transferMsg, ok := msg.(*ibctransfertypes.MsgTransfer); ok {
-			if strings.HasPrefix(transferMsg.Token.Denom, "fractionalNFT/") {
+			if strings.HasPrefix(transferMsg.Token.Denom, fractionnfttypes.ModuleName) {
 				return true
 			}
 		}

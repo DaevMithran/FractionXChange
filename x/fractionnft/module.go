@@ -3,6 +3,7 @@ package module
 import (
 	"context"
 	"encoding/json"
+	"strings"
 
 	"github.com/gorilla/mux"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
@@ -20,6 +21,10 @@ import (
 
 	"github.com/MANTRA-Chain/mantrachain/x/fractionnft/keeper"
 	"github.com/MANTRA-Chain/mantrachain/x/fractionnft/types"
+
+	nftkeeper "cosmossdk.io/x/nft/keeper"
+	authkeeper "github.com/cosmos/cosmos-sdk/x/auth/keeper"
+	bankkeeper "github.com/cosmos/cosmos-sdk/x/bank/keeper"
 )
 
 const (
@@ -44,45 +49,78 @@ type AppModule struct {
 	AppModuleBasic
 
 	keeper keeper.Keeper
+
+	accountKeeper authkeeper.AccountKeeper
+	nftKeeper nftkeeper.Keeper
+	bankKeeper bankkeeper.Keeper
 }
 
 // EndBlock implements module.HasABCIEndBlock.
-func (am AppModule) EndBlock(context.Context) ([]abci.ValidatorUpdate, error) {
-	panic("unimplemented")
+func (am AppModule) EndBlock(ctx context.Context) ([]abci.ValidatorUpdate, error) {
+	sdkCtx := sdk.UnwrapSDKContext(ctx)
+	blockHeight := sdkCtx.BlockHeight()
+
+	tokenizedNFT, err := am.keeper.NFTMapping.Iterate(ctx, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	keyValues, err := tokenizedNFT.KeyValues()
+	if err != nil {
+		return nil, err
+	}
+
+	for _, v := range keyValues {
+		if v.Value.TimeoutHeight == blockHeight {
+			splitted := strings.Split(v.Key, "-")
+			am.keeper.RemintNFT(ctx, splitted[1], splitted[2], sdk.AccAddress(types.ModuleName))
+		} 
+	}
+	return nil, nil
 }
 
 // Name implements module.HasABCIEndBlock.
 // Subtle: this method shadows the method (AppModuleBasic).Name of AppModule.AppModuleBasic.
 func (am AppModule) Name() string {
-	panic("unimplemented")
+	return types.ModuleName
 }
 
 // RegisterGRPCGatewayRoutes implements module.HasABCIEndBlock.
 // Subtle: this method shadows the method (AppModuleBasic).RegisterGRPCGatewayRoutes of AppModule.AppModuleBasic.
-func (am AppModule) RegisterGRPCGatewayRoutes(client.Context, *runtime.ServeMux) {
-	panic("unimplemented")
+func (am AppModule) RegisterGRPCGatewayRoutes(clientCtx client.Context, mux *runtime.ServeMux) {
+	err := types.RegisterQueryHandlerClient(context.Background(), mux, types.NewQueryClient(clientCtx))
+	if err != nil {
+		// same behavior as in cosmos-sdk
+		panic(err)
+	}
 }
 
 // RegisterInterfaces implements module.HasABCIEndBlock.
 // Subtle: this method shadows the method (AppModuleBasic).RegisterInterfaces of AppModule.AppModuleBasic.
-func (am AppModule) RegisterInterfaces(codectypes.InterfaceRegistry) {
-	panic("unimplemented")
+func (am AppModule) RegisterInterfaces(r codectypes.InterfaceRegistry) {
+	types.RegisterInterfaces(r)
 }
 
 // RegisterLegacyAminoCodec implements module.HasABCIEndBlock.
 // Subtle: this method shadows the method (AppModuleBasic).RegisterLegacyAminoCodec of AppModule.AppModuleBasic.
-func (am AppModule) RegisterLegacyAminoCodec(*codec.LegacyAmino) {
-	panic("unimplemented")
+func (am AppModule) RegisterLegacyAminoCodec(cdc *codec.LegacyAmino) {
+	types.RegisterLegacyAminoCodec(cdc)
 }
 
 // NewAppModule constructor
 func NewAppModule(
 	cdc codec.Codec,
 	keeper keeper.Keeper,
+	accountKeeper authkeeper.AccountKeeper,
+	nftKeeper nftkeeper.Keeper,
+	bankKeeper bankkeeper.Keeper,
 ) *AppModule {
 	return &AppModule{
 		AppModuleBasic: AppModuleBasic{cdc: cdc},
 		keeper:         keeper,
+		accountKeeper: accountKeeper,
+		nftKeeper: nftKeeper,
+		bankKeeper: bankKeeper,
 	}
 }
 

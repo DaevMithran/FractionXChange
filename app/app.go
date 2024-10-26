@@ -182,7 +182,7 @@ var maccPerms = map[string][]string{
 	stakingtypes.BondedPoolName:    {authtypes.Burner, authtypes.Staking},
 	stakingtypes.NotBondedPoolName: {authtypes.Burner, authtypes.Staking},
 	govtypes.ModuleName:            {authtypes.Burner},
-	nft.ModuleName:                 nil,
+	nft.ModuleName:                 {authtypes.Minter},
 	// non sdk modules
 	ibctransfertypes.ModuleName:  {authtypes.Minter, authtypes.Burner},
 	ibcfeetypes.ModuleName:       nil,
@@ -786,7 +786,7 @@ func New(
 		tokenfactory.NewAppModule(appCodec, app.TokenFactoryKeeper),
 		tax.NewAppModule(appCodec, app.TaxKeeper),
 		feemarket.NewAppModule(appCodec, *app.FeeMarketKeeper),
-		fractionnft.NewAppModule(appCodec, app.FractionnftKeeper),
+		fractionnft.NewAppModule(appCodec, app.FractionnftKeeper, app.AccountKeeper, app.NFTKeeper, app.BankKeeper),
 
 	)
 

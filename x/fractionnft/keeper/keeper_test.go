@@ -12,7 +12,6 @@ import (
 	module "github.com/MANTRA-Chain/mantrachain/x/fractionnft"
 	"github.com/MANTRA-Chain/mantrachain/x/fractionnft/keeper"
 	"github.com/MANTRA-Chain/mantrachain/x/fractionnft/types"
-	fractionnfttypes "github.com/MANTRA-Chain/mantrachain/x/fractionnft/types"
 	cmtproto "github.com/cometbft/cometbft/proto/tendermint/types"
 	"github.com/cosmos/cosmos-sdk/runtime"
 	"github.com/cosmos/cosmos-sdk/testutil/integration"
@@ -37,7 +36,7 @@ var maccPerms = map[string][]string{
 	stakingtypes.NotBondedPoolName: {authtypes.Burner, authtypes.Staking},
 	minttypes.ModuleName:           {authtypes.Minter},
 	govtypes.ModuleName:            {authtypes.Burner},
-	fractionnfttypes.ModuleName:  {authtypes.Minter, authtypes.Burner},
+	types.ModuleName:  {authtypes.Minter, authtypes.Burner},
 }
 
 type testFixture struct {
@@ -80,7 +79,7 @@ func SetupTest(t *testing.T) *testFixture {
 	f.k = keeper.NewKeeper(encCfg.Codec, runtime.NewKVStoreService(keys[types.ModuleName]), logger, f.govModAddr, f.accountkeeper, f.nftkeeper, f.bankkeeper)
 	f.msgServer = keeper.NewMsgServerImpl(f.k)
 	f.queryServer = keeper.NewQuerier(f.k)
-	f.appModule = module.NewAppModule(encCfg.Codec, f.k)
+	f.appModule = module.NewAppModule(encCfg.Codec, f.k, f.accountkeeper, f.nftkeeper, f.bankkeeper)
 
 	return f
 }
