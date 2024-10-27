@@ -14,17 +14,28 @@ handle_error() {
   exit 1
 }
 
-# Function to display colorful headers
-print_header() {
-  echo -e "\n${CYAN}$1${NC}"
+# Function to display colorful section headers
+print_section() {
+  echo -e "\n${CYAN}########################################################################################"
+  echo -e "                         $1"
+  echo -e "#######################################################################################${NC}\n"
+}
+
+print_title() {
+  echo -e "\n${YELLOW}########################################################################################"
+  echo -e "${YELLOW}#                                                                                      #"
+  echo -e "#                              ${GREEN}*** FRACTIONAL NFT DEMO ***${YELLOW}                             #"
+  echo -e "#                                                                                      #"
+  echo -e "########################################################################################${NC}\n"
 }
 
 # Function to populate NFTs
 populate_nfts() {
-  print_header "Populating NFTs..."
+  print_section "Populate NFTs"
+  
   nfts=(
-    "Art|Mona Lisa|A painting by Leonardo da Vinci|https://upload.wikimedia.org/wikipedia/commons/6/6a/Mona_Lisa.jpg|1"
-    "Real_Estate|Dubai Museum Of Future|A futuristic museum with constant funding and revenue|https://media.istockphoto.com/id/1395117280/photo/the-museum-of-the-future-dubai-uae.webp?s=2048x2048&w=is&k=20&c=y4fm92ak37sLNTug0rw0XST-dvKyrIVImx-Q_kiWTgA=|2"
+    "Renewables|Wind Turbine 001|A wind turbine turns wind energy into electricity|https://solar.io|1"
+    "Real_Estate|Dubai Museum Of Future|A futuristic museum with constant funding and revenue|https://dubai_museum|2"
   )
 
   minted_nfts=()
@@ -35,43 +46,57 @@ populate_nfts() {
     if [ $? -ne 0 ]; then
       handle_error "Failed to mint NFT: $name"
     fi
-
+    sleep 2
     minted_nfts+=("$category|$name|$description|$image|$id")
     echo -e "${GREEN}Minted NFT:${NC} $name with ID: $id in Category: $category"
   done
 }
 
-# Function to query and display NFT and token owners
+# Function to query and display NFT and token owners with conditional status
 query_owners() {
   local category=$1
   local nft_id=$2
 
-  print_header "Querying Owners of NFT and Tokens for Category: $category, NFT ID: $nft_id"
-
-  # Query NFT owner
-  nft_result=$(./build/mantrachaind query nft owner "$category" "$nft_id" -o json)
-  if [ $? -ne 0 ]; then
-    handle_error "Failed to retrieve NFT owner for $category - $nft_id"
-  fi
-  nft_owner=$(echo "$nft_result" | jq -r '.owner')
-  echo -e "${YELLOW}NFT Owner:${NC} ${GREEN}$nft_owner${NC}"
-
+  echo -e "\n${YELLOW}---------------------------------${NC}"
+  
   # Query Token owners
   token_result=$(./build/mantrachaind query bank denom-owners "fractionNFT-$category-$nft_id" -o json)
   if [ $? -ne 0 ]; then
     handle_error "Failed to retrieve token owners for $category - $nft_id"
   fi
 
-  # Display token ownership details
-  echo -e "${YELLOW}Token Owners:${NC}"
   denom_owners_count=$(echo "$token_result" | jq '.denom_owners | length')
-  
+
+  # Display NFT owner status based on token owners' existence
   if [ "$denom_owners_count" -eq 0 ]; then
-    echo -e "${RED}No token owners found for fractionNFT-${category}-${nft_id}.${NC}"
+    nft_result=$(./build/mantrachaind query nft owner "$category" "$nft_id" -o json)
+    if [ $? -ne 0 ]; then
+      handle_error "Failed to retrieve NFT owner for $category - $nft_id"
+    fi
+    nft_owner=$(echo "$nft_result" | jq -r '.owner')
+    echo -e "${YELLOW}NFT Status:${NC} ${GREEN}Active - Owned by $nft_owner${NC}"
   else
+    echo -e "${YELLOW}NFT Status:${NC} ${RED}Locked - NFT has been tokenized${NC}"
+  fi
+
+  # Display token ownership details
+  if [ "$denom_owners_count" -eq 0 ]; then
+    echo -e "${YELLOW}Token Owners:${NC} ${RED}Token Denom fractionNFT-${category}-${nft_id} does not exist${NC}"
+  else
+    echo -e "${YELLOW}Token Owners:${NC}"
     echo "$token_result" | jq -r '.denom_owners[] | "Address: \(.address), Balance: \(.balance.amount) \(.balance.denom)"' | while read line; do
-      echo -e "${GREEN}$line${NC}"
+    echo -e "${GREEN}$line${NC}"
     done
+  fi
+
+  echo -e "${YELLOW}---------------------------------${NC}"
+
+  # Ask user if they want to continue with a default "yes"
+  read -p "Do you want to continue to the next step? (yes/no) [default: yes]: " continue_choice
+  continue_choice="${continue_choice:-yes}"
+  if [[ "$continue_choice" != "yes" ]]; then
+    echo -e "${RED}Exiting the script...${NC}"
+    exit 0
   fi
 }
 
@@ -79,30 +104,40 @@ query_owners() {
 tokenize_nft() {
   local category=$1
   local nft_id=$2
+
+  print_section "Tokenize NFT with Category: $category, ID: $nft_id"
+
   read -p "Enter the token supply: " token_supply
   read -p "Enter the timeout height: " timeout_height
-  print_header "Tokenizing NFT with Category: $category, ID: $nft_id"
   
   tx_result=$(./build/mantrachaind tx fractionnft tokenize "$category" "$nft_id" "$token_supply" "$timeout_height" --from=acc0 --keyring-backend test --home=~/.mantrasinglenodetest --fees=500000uom --gas=auto --yes)
   if [ $? -ne 0 ]; then
     handle_error "Failed to tokenize NFT: $nft_id in Category: $category"
   fi
-  sleep 5
+
+  sleep 3
 }
 
 # Function to transfer fractions of NFT
 transfer_fractions() {
   local category=$1
   local nft_id=$2
-  read -p "Fractions to Transfer: " amount
-  print_header "Transferring $amount fractions of NFT with ID: $nft_id in Category: $category"
+  print_section "Let's Transfer some NFT fractions with ID: $nft_id in Category: $category"
   
+  read -p "Fractions to Transfer: " amount
+
   tx_result=$(./build/mantrachaind tx bank send mantra1hj5fveer5cjtn4wd6wstzugjfdxzl0xpd8ck0e mantra10e354cme55fph398fhfjt8ujcme9qz9j8eumpd "${amount}fractionNFT-${category}-${nft_id}" --from=acc0 --keyring-backend test --home=~/.mantrasinglenodetest --fees=500000uom --gas=auto --yes)
   if [ $? -ne 0 ]; then
     handle_error "Failed to transfer NFT fractions for $nft_id in Category: $category"
   fi
+
   sleep 3
 }
+
+# Call the 3D title at the start of the script
+print_title
+
+sleep 3
 
 # Main sequence
 populate_nfts
@@ -111,18 +146,23 @@ populate_nfts
 IFS='|' read -r demo_category demo_name demo_description demo_image demo_id <<< "${minted_nfts[0]}"
 
 query_owners "$demo_category" "$demo_id"
+
 tokenize_nft "$demo_category" "$demo_id"
 query_owners "$demo_category" "$demo_id"
+
 transfer_fractions "$demo_category" "$demo_id"
 query_owners "$demo_category" "$demo_id"
 
-# Wait for the transaction to complete
-print_header "Waiting for timeout"
-
-# Allow users to decide to wait longer
-read -p "Click enter to continue?"
-
-query_owners "$demo_category" "$demo_id"
+# Wait for transaction inclusion at the end of the demo
+print_section "Waiting for Timeout"
+while true; do
+  query_owners "$demo_category" "$demo_id"
+  read -p "Do you want to query owners again? (yes/no) [default: yes]: " repeat_query
+  repeat_query="${repeat_query:-yes}"
+  if [[ "$repeat_query" != "yes" ]]; then
+    break
+  fi
+done
 
 # Final output for clarity
-print_header "All operations completed successfully!"
+print_section "All Operations Completed Successfully!"
